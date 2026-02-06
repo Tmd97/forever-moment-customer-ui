@@ -1,0 +1,7 @@
+// Main application styles entry point
+// Import shared variables and base styles
+@import './variables';
+@import './main';
+
+// Import domain-specific styles
+@import './customer';

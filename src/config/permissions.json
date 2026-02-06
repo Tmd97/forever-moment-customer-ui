@@ -1,0 +1,9 @@
+{
+    "roles": {
+        "customer": {
+            "permissions": [
+                "home.view"
+            ]
+        }
+    }
+}

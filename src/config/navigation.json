@@ -1,0 +1,10 @@
+{
+    "customer": [
+        {
+            "id": "home",
+            "label": "Home",
+            "path": "/",
+            "icon": "Home"
+        }
+    ]
+}
