@@ -1,5 +1,5 @@
 // Import variables
-@import './variables';
+@use './variables' as vars;
 
 // Global styles
 // Note: Using Tailwind's preflight reset, so we don't need aggressive resets here
@@ -22,8 +22,8 @@ code {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: $spacing-md;
-    padding-right: $spacing-md;
+    padding-left: vars.$spacing-md;
+    padding-right: vars.$spacing-md;
 }
 
 .text-center {
