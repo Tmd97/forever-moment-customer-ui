@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import { CUSTOMER_CONFIG } from '@/config/constants';
-
+import UpperNavbar from '../UpperNavbar';
+import LowerNavbar from '../Lowernavbar';
+import HeroBanner from '../HeroBanner';
+import PopularSearchesSlider from '../PopularSearch';
 const Header = () => {
     return (
         <header className='border-b dark:border-gray-800 sticky top-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50'>
@@ -14,6 +17,11 @@ const Header = () => {
                     </Link>
                 </nav>
             </div>
+
+            <UpperNavbar/>
+            <LowerNavbar/>
+          <HeroBanner/>
+          <PopularSearchesSlider/>
         </header>
     );
 };
