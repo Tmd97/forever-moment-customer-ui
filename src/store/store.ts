@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { homeReducer } from '@/features/home/store/reducer';
+import { headerReducer } from '@/features/header/store/reducer';
+import { sliderReducer } from '@/features/slider/store/reducer';
 
 export const store = configureStore({
   reducer: {
     home: homeReducer,
+    header: headerReducer,
+    slider: sliderReducer,
   },
 });
 

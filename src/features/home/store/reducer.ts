@@ -9,7 +9,7 @@ const initialState = {
 export const homeReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case types.GET_HOME_DATA:
-            return { ...state, loading: true };
+            return { ...state, loading: false };
         case types.GET_HOME_DATA_SUCCESS:
             return { ...state, loading: false, data: action.payload };
         case types.GET_HOME_DATA_FAILURE:

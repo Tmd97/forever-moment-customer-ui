@@ -1,4 +1,4 @@
-import CustomerHomePage from './CustomerHomePage';
+import CustomerHomePage from './CustomerHome';
 
 export const homeRoutes = [
     {

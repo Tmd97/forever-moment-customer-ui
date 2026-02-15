@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import Header from '@/components/navigation/Header';
+import Header from '@/features/header/pages/HeaderPage';
 import Footer from '@/components/navigation/footer';
 
 const CustomerLayout = () => {
   return (
     <div className='min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white flex flex-col'>
       <Header />
-      <main className='flex-1'>
+      <main>
         <Outlet />
       </main>
       <Footer />
