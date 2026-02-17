@@ -467,6 +467,61 @@
         right: 0;
         height: 12px;
     }
+
+    /* ── Multi-column variants ── */
+    &.cols-1 {
+        min-width: 240px;
+    }
+
+    &.cols-2 {
+        min-width: 480px;
+
+        .dropdownList {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0 1rem;
+        }
+    }
+
+    &.cols-3 {
+        min-width: 720px;
+
+        .dropdownList {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0 1rem;
+        }
+    }
+
+    &.cols-4 {
+        min-width: 960px;
+
+        .dropdownList {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0 1rem;
+        }
+    }
+
+    &.cols-5 {
+        min-width: 1200px;
+
+        .dropdownList {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0 1rem;
+        }
+    }
+
+    &.cols-6 {
+        min-width: 1400px;
+
+        .dropdownList {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0 1rem;
+        }
+    }
 }
 
 .dropdownInner {
@@ -724,25 +779,98 @@
 }
 
 /* ── Responsive ── */
+/* ── Responsive ── */
 @media (max-width: 768px) {
+    .stickyHeader {
+        position: relative;
+        /* Unstick on mobile if content is tall */
+    }
+
     .inner {
-        padding: 0 1rem;
-        height: 60px;
+        padding: 0;
+        height: auto;
+    }
+
+    /* Top Row Layout */
+    .topRow {
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .brand {
+        order: 1;
+    }
+
+    .actions {
+        order: 2;
+        margin-left: auto;
+    }
+
+    .searchBarContainer {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .searchPill {
+        height: 44px;
+        /* Larger touch target */
     }
 
     .brandTagline {
         display: none;
     }
 
+    /* Bottom Row (Navigation) */
+    .bottomRow {
+        justify-content: flex-start;
+        padding: 0 1rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+        /* Hide Scrollbar */
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
     .nav {
-        display: none;
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.8rem 0;
+        white-space: nowrap;
+    }
+
+    .navLink {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 20px;
+
+        &::after {
+            display: none;
+            /* Remove underline effect on mobile */
+        }
+
+        &.active,
+        &:hover {
+            background: rgba(183, 110, 121, 0.1);
+        }
+    }
+
+    /* Disable large dropdowns on mobile for now, or style them differently */
+    .dropdown {
+        display: none !important;
     }
 
     .mobileToggle {
-        display: flex;
-    }
-
-    .dropdown {
         display: none;
+        /* We are not using the drawer anymore */
     }
 }

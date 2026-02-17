@@ -1,11 +1,32 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronIcon, ArrowRightIcon, StarIcon } from './HeaderIcons';
-import { iconMap, defaultIcon, dummySubcategories } from './HeaderData';
+import { ChevronIcon, ArrowRightIcon } from './HeaderIcons';
+import { iconMap, defaultIcon } from './HeaderData';
 import '../../css/styles.scss';
 
+interface SubCategory {
+    id: number;
+    name: string;
+    description: string;
+    displayOrder: number;
+    isActive: boolean;
+    categoryId: number;
+    categoryName: string;
+    categorySlug: string;
+}
+
+interface Category {
+    id: number;
+    name: string;
+    description: string;
+    slug: string;
+    displayOrder: number;
+    isActive: boolean;
+    subCategories: SubCategory[];
+}
+
 interface LowerHeaderProps {
-    categories: any[];
+    categories: Category[];
 }
 
 const LowerHeader = ({ categories }: LowerHeaderProps) => {
@@ -30,7 +51,11 @@ const LowerHeader = ({ categories }: LowerHeaderProps) => {
         <div className='bottomRow'>
             <nav className='nav'>
                 {activeCategories.map((cat) => {
-                    const subcategories = dummySubcategories[cat.name] || [];
+                    // Sort active subcategories
+                    const subcategories = (cat.subCategories || [])
+                        .filter((sub) => sub.isActive)
+                        .sort((a, b) => a.displayOrder - b.displayOrder);
+
                     const isOpen = activeDropdown === cat.id;
 
                     return (
@@ -51,7 +76,7 @@ const LowerHeader = ({ categories }: LowerHeaderProps) => {
 
                             {/* ── Dropdown Panel ── */}
                             {subcategories.length > 0 && (
-                                <div className={`dropdown ${isOpen ? 'open' : ''}`}>
+                                <div className={`dropdown ${isOpen ? 'open' : ''} cols-${Math.min(subcategories.length, 3)}`}>
                                     <div className='dropdownInner'>
                                         <div className='dropdownHeader'>
                                             <span className='dropdownIcon'>
@@ -64,8 +89,8 @@ const LowerHeader = ({ categories }: LowerHeaderProps) => {
                                         </div>
                                         <div className='dropdownDivider' />
                                         <ul className='dropdownList'>
-                                            {subcategories.map((sub, idx) => (
-                                                <li key={idx}>
+                                            {subcategories.map((sub) => (
+                                                <li key={sub.id}>
                                                     <Link
                                                         to={`/category/${cat.name.toLowerCase().replace(/\s+/g, '-')}/${sub.name.toLowerCase().replace(/\s+/g, '-')}`}
                                                         className='dropdownItem'
@@ -74,9 +99,6 @@ const LowerHeader = ({ categories }: LowerHeaderProps) => {
                                                             <span className='dropdownItemName'>{sub.name}</span>
                                                             <span className='dropdownItemDesc'>{sub.description}</span>
                                                         </div>
-                                                        {sub.price && (
-                                                            <span className='dropdownItemPrice'>{sub.price}</span>
-                                                        )}
                                                         <span className='dropdownItemArrow'>
                                                             <ArrowRightIcon />
                                                         </span>
