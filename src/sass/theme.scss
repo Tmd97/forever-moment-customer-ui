@@ -1,0 +1,28 @@
+@use './variables' as *;
+
+:root {
+
+  /* PRIMARY THEME */
+  --primary: #{$color-primary};
+  --primary-light: #{$color-secondary};
+
+  /* BACKGROUND */
+  --bg-main: #{$color-white};
+  --bg-light: #{$color-gray-50};
+
+  /* TEXT */
+  --text-main: #{$color-gray-900};
+  --text-light: #{$color-gray-600};
+
+  /* BORDER */
+  --border-color: #{$color-gray-200};
+
+  /* SHADOW */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+
+  /* RADIUS */
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+}
