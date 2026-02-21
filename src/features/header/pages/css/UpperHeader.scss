@@ -1,0 +1,233 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.upperHeader {
+
+  background: $bg-main;
+  border-bottom: 1px solid $border-color;
+
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+}
+
+.headerInner {
+
+  @include flex-between;
+
+  height: 72px;
+}
+
+
+/* LOGO */
+
+.brandSection {
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+
+}
+
+.logo {
+
+  height: 42px;
+}
+
+
+.brandName {
+
+  font-weight: 700;
+  font-size: 18px;
+  color: $text-main;
+
+}
+
+.brandTagline {
+
+  font-size: 12px;
+  color: $text-light;
+
+}
+
+
+/* SEARCH */
+
+.searchContainer {
+
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+}
+
+.searchBox {
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  max-width: 600px;
+
+  background: white;
+  padding: 10px 16px;
+
+  border-radius: $radius-lg;
+
+  box-shadow: $shadow-sm;
+
+}
+
+
+.searchInput {
+
+  border: none;
+  outline: none;
+
+  flex: 1;
+
+}
+
+
+.divider {
+
+  width: 1px;
+  height: 24px;
+  background: $border-color;
+
+}
+
+
+/* LOCATION */
+
+.locationWrapper {
+
+  position: relative;
+
+}
+
+.locationButton {
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  cursor: pointer;
+
+}
+
+
+.locationDropdown {
+
+  position: absolute;
+
+  top: 120%;
+  left: 0;
+
+  background: white;
+
+  box-shadow: $shadow-lg;
+
+  border-radius: $radius-md;
+
+  padding: 8px;
+
+  width: 180px;
+
+}
+
+
+.cityItem {
+
+  padding: 8px;
+  cursor: pointer;
+
+  border-radius: $radius-sm;
+
+}
+
+.cityItem:hover {
+
+  background: rgba($primary, 0.1);
+
+  color: $primary;
+
+}
+
+
+/* RIGHT SIDE */
+
+.headerActions {
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+}
+
+
+.bookingBtn {
+
+  padding: 8px 14px;
+
+  border-radius: $radius-md;
+
+  border: 1px solid $primary;
+
+  color: $primary;
+
+  transition: $transition;
+
+}
+
+.bookingBtn:hover {
+
+  background: $primary;
+  color: white;
+
+}
+
+
+.loginBtn {
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: $primary;
+  color: white;
+
+  padding: 8px 16px;
+
+  border-radius: $radius-md;
+
+}
+
+
+.mobileMenuBtn {
+
+  display: none;
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width: 768px) {
+
+  .searchContainer {
+
+    display: none;
+
+  }
+
+  .mobileMenuBtn {
+
+    display: block;
+
+  }
+
+}

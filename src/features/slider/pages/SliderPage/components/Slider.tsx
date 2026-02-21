@@ -1,182 +1,274 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import '../../css/styles.scss';
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Calendar,
+} from "lucide-react";
 
-/* ─── SVG Icons ─── */
-const ChevronLeftIcon = () => (
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
-        <path d='m15 18-6-6 6-6' />
-    </svg>
-);
+const slides = [
+  {
+    id: 1,
+    title: "Luxury Decoration for Every Occasion",
+    subtitle:
+      "Transform your moments into unforgettable memories",
+    image:
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070",
+  },
+  {
+    id: 2,
+    title: "Beautiful Birthday Surprise Setups",
+    subtitle:
+      "Premium decoration & photography services",
+    image:
+      "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=2070",
+  },
+  {
+    id: 3,
+    title: "Romantic Anniversary Decorations",
+    subtitle:
+      "Create magical romantic experiences",
+    image:
+      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=2070",
+  },
+  {
+    id: 4,
+    title: "Corporate Event Specialists",
+    subtitle:
+      "Professional setups for modern businesses",
+    image:
+      "https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=2070",
+  },
+];
 
-const ChevronRightIcon = () => (
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
-        <path d='m9 18 6-6-6-6' />
-    </svg>
-);
+export default function PremiumHeroSlider() {
 
-const ArrowRightIcon = () => (
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
-        <path d='M5 12h14' />
-        <path d='m12 5 7 7-7 7' />
-    </svg>
-);
+  const [index, setIndex] = useState(0);
+  const [hovered, setHovered] = useState(false);
 
-/* ─── Gradient fallbacks for categories without images ─── */
-const gradientMap: Record<string, string> = {
-    'Birthday': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    'Anniversary': 'linear-gradient(135deg, #c3413e 0%, #8b1a1a 50%, #d4a574 100%)',
-    'Wedding': 'linear-gradient(135deg, #f5f7fa 0%, #d4af37 50%, #b76e79 100%)',
-    'Gifts': 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 50%, #c9a96e 100%)',
-    'Festivals': 'linear-gradient(135deg, #f093fb 0%, #feda75 50%, #fa7e1e 100%)',
-    'Candlelight Dinner': 'linear-gradient(135deg, #2d1b00 0%, #8b4513 50%, #d4a574 100%)',
-};
+  const timeoutRef = useRef<any>(null);
 
-const AUTOPLAY_INTERVAL = 5000;
+  // Auto slide with pause on hover
+  useEffect(() => {
 
-/* ─── Slider Component ─── */
-interface SliderProps {
-    slides: any[];
-    slidesLoading: boolean;
-    getSlides: () => void;
-}
+    if (hovered) return;
 
-const Slider = ({ slides, getSlides }: SliderProps) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isPaused, setIsPaused] = useState(false);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-    const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-    const sliderRef = useRef<HTMLDivElement>(null);
+    timeoutRef.current = setTimeout(() => {
 
-    // Touch swipe state
-    const touchStartX = useRef(0);
-    const touchEndX = useRef(0);
+      setIndex((prev) =>
+        prev === slides.length - 1 ? 0 : prev + 1
+      );
 
-    useEffect(() => {
-        getSlides();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, 5000);
 
-    const goToSlide = useCallback((index: number) => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
-        setCurrentIndex(index);
-        setTimeout(() => setIsTransitioning(false), 600);
-    }, [isTransitioning]);
+    return () => clearTimeout(timeoutRef.current);
 
-    const goNext = useCallback(() => {
-        if (slides.length === 0) return;
-        goToSlide((currentIndex + 1) % slides.length);
-    }, [currentIndex, slides.length, goToSlide]);
+  }, [index, hovered]);
 
-    const goPrev = useCallback(() => {
-        if (slides.length === 0) return;
-        goToSlide((currentIndex - 1 + slides.length) % slides.length);
-    }, [currentIndex, slides.length, goToSlide]);
 
-    // Autoplay
-    useEffect(() => {
-        if (isPaused || slides.length <= 1) return;
-        intervalRef.current = setInterval(goNext, AUTOPLAY_INTERVAL);
-        return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
-        };
-    }, [isPaused, goNext, slides.length]);
 
-    // Touch handlers
-    const handleTouchStart = (e: React.TouchEvent) => {
-        touchStartX.current = e.changedTouches[0].screenX;
-    };
+  const next = () => {
+    setIndex(index === slides.length - 1 ? 0 : index + 1);
+  };
 
-    const handleTouchEnd = (e: React.TouchEvent) => {
-        touchEndX.current = e.changedTouches[0].screenX;
-        const diff = touchStartX.current - touchEndX.current;
-        if (Math.abs(diff) > 50) {
-            diff > 0 ? goNext() : goPrev();
-        }
-    };
+  const prev = () => {
+    setIndex(index === 0 ? slides.length - 1 : index - 1);
+  };
 
-    const handleImageError = (slideId: number) => {
-        setImageErrors((prev) => new Set(prev).add(slideId));
-    };
 
-    if (slides.length === 0) return null;
 
-    return (
-        <section
-            className='slider'
-            ref={sliderRef}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+  return (
+
+    <section
+      className="relative h-[85vh] w-full overflow-hidden"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+
+      <AnimatePresence>
+
+        <motion.div
+          key={slides[index].id}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
         >
-            {/* ── Slides ── */}
-            <div className='slidesContainer'>
-                {slides.map((slide: any, index: number) => {
-                    const hasImageError = imageErrors.has(slide.id);
-                    const showGradient = hasImageError || !slide.image;
-                    const gradient = gradientMap[slide.category] || 'linear-gradient(135deg, #667eea, #764ba2)';
 
-                    return (
-                        <div
-                            key={slide.id}
-                            className={`slide ${index === currentIndex ? 'active' : ''}`}
-                            style={showGradient ? { background: gradient } : undefined}
-                        >
-                            {!showGradient && (
-                                <img
-                                    src={slide.image}
-                                    alt={slide.title}
-                                    className='slideImage'
-                                    onError={() => handleImageError(slide.id)}
-                                    loading={index === 0 ? 'eager' : 'lazy'}
-                                />
-                            )}
-                            <div className='slideOverlay' />
-                            <div className='slideContent'>
-                                <span className='slideBadge'>{slide.category}</span>
-                                <h2 className='slideTitle'>{slide.title}</h2>
-                                <p className='slideSubtitle'>{slide.subtitle}</p>
-                                <Link to={slide.link} className='slideCta'>
-                                    {slide.cta}
-                                    <ArrowRightIcon />
-                                </Link>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+          {/* IMAGE */}
+          <img
+            src={slides[index].image}
+            className="w-full h-full object-cover"
+          />
 
-            {/* ── Navigation Arrows ── */}
-            <button className='sliderArrow sliderArrowLeft' onClick={goPrev} aria-label='Previous slide'>
-                <ChevronLeftIcon />
-            </button>
-            <button className='sliderArrow sliderArrowRight' onClick={goNext} aria-label='Next slide'>
-                <ChevronRightIcon />
-            </button>
+          {/* GRADIENT OVERLAY */}
+          <div className="
+            absolute inset-0
+            bg-gradient-to-r
+            from-black/70
+            via-black/40
+            to-transparent
+          " />
 
-            {/* ── Dots Navigation ── */}
-            <div className='sliderDots'>
-                {slides.map((_: any, index: number) => (
-                    <button
-                        key={index}
-                        className={`sliderDot ${index === currentIndex ? 'active' : ''}`}
-                        onClick={() => goToSlide(index)}
-                        aria-label={`Go to slide ${index + 1}`}
-                    />
-                ))}
-            </div>
+          {/* CONTENT */}
+          <div className="
+            absolute inset-0
+            flex items-center
+            max-w-7xl mx-auto px-6
+          ">
 
-            {/* ── Progress Bar ── */}
-            <div className='sliderProgress'>
-                <div
-                    className={`sliderProgressBar ${!isPaused ? 'animating' : ''}`}
-                    key={currentIndex}
-                />
-            </div>
-        </section>
-    );
-};
+            <motion.div
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="
+                backdrop-blur-md
+                bg-white/10
+                p-8 rounded-2xl
+                max-w-xl
+                border border-white/20
+              "
+            >
 
-export default Slider;
+              {/* Slide counter */}
+              <div className="text-orange-400 mb-2 text-sm">
+                {index + 1} / {slides.length}
+              </div>
+
+
+              {/* Title */}
+              <h1 className="
+                text-4xl md:text-6xl
+                font-bold text-white mb-4
+              ">
+                {slides[index].title}
+              </h1>
+
+
+              {/* Subtitle */}
+              <p className="
+                text-white/90
+                mb-6 text-lg
+              ">
+                {slides[index].subtitle}
+              </p>
+
+
+              {/* Buttons */}
+              <div className="flex gap-4">
+
+                <button className="
+                  bg-orange-500
+                  hover:bg-orange-600
+                  text-white
+                  px-6 py-3 rounded-full
+                  flex items-center gap-2
+                  shadow-lg
+                ">
+                  <Calendar size={18} />
+                  Book Now
+                </button>
+
+
+                <button className="
+                  bg-white/20
+                  hover:bg-white/30
+                  text-white
+                  px-6 py-3 rounded-full
+                  backdrop-blur-md
+                ">
+                  Explore
+                </button>
+
+              </div>
+
+            </motion.div>
+
+          </div>
+
+        </motion.div>
+
+      </AnimatePresence>
+
+
+
+      {/* LEFT ARROW */}
+      <button
+        onClick={prev}
+        className="
+          absolute left-6 top-1/2
+          -translate-y-1/2
+          bg-white/20 hover:bg-white/40
+          backdrop-blur-md
+          p-3 rounded-full
+        "
+      >
+        <ChevronLeft className="text-white" />
+      </button>
+
+
+
+      {/* RIGHT ARROW */}
+      <button
+        onClick={next}
+        className="
+          absolute right-6 top-1/2
+          -translate-y-1/2
+          bg-white/20 hover:bg-white/40
+          backdrop-blur-md
+          p-3 rounded-full
+        "
+      >
+        <ChevronRight className="text-white" />
+      </button>
+
+
+
+      {/* PROGRESS BAR */}
+      <div className="
+        absolute bottom-0 left-0
+        w-full h-1 bg-white/20
+      ">
+
+        <motion.div
+          key={index}
+          initial={{ width: 0 }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 5 }}
+          className="h-full bg-orange-500"
+        />
+
+      </div>
+
+
+
+      {/* DOTS */}
+      <div className="
+        absolute bottom-6 left-1/2
+        -translate-x-1/2
+        flex gap-3
+      ">
+
+        {slides.map((_, i) => (
+
+          <div
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`
+              w-3 h-3 rounded-full cursor-pointer
+              ${i === index
+                ? "bg-orange-500 scale-125"
+                : "bg-white/50"}
+            `}
+          />
+
+        ))}
+
+      </div>
+
+    </section>
+
+  );
+
+}
