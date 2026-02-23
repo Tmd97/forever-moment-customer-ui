@@ -71,115 +71,115 @@ export default function FeaturedServices() {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-12">
+   <section className="max-w-7xl mx-auto px-6 py-12">
 
-      {/* Heading */}
-      <div className="flex justify-between items-center mb-6">
+  {/* Heading */}
+  <div className="flex justify-between items-center mb-6">
 
-        <div>
-          <h2 className="text-2xl font-semibold">
-            Featured Services
-          </h2>
+    <div>
+      <h2 className="text-2xl font-semibold text-black">
+        Featured Services
+      </h2>
 
-          <p className="text-gray-500 text-sm">
-            Most popular decoration services
-          </p>
+      <p className="text-gray-600 text-sm">
+        Most popular decoration services
+      </p>
+    </div>
+
+    <Link
+      to="/services"
+      className="text-[#b76e79] text-sm font-medium hover:text-[#c9a96e] transition-all duration-300"
+    >
+      View All
+    </Link>
+
+  </div>
+
+
+  {/* Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    {services.map((service) => (
+
+      <div
+        key={service.id}
+        className="bg-white rounded-xl shadow hover:shadow-xl transition-all duration-300 overflow-hidden group border border-[#d4af37]/10"
+      >
+
+        {/* Image */}
+        <div className="relative h-[220px] overflow-hidden">
+
+          <img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+          />
+
+          {/* Like Button */}
+          <div
+            onClick={() => toggleLike(service.id)}
+            className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow cursor-pointer hover:bg-[#b76e79]/10 transition-all"
+          >
+            <Heart
+              size={18}
+              className={
+                liked.includes(service.id)
+                  ? "text-[#b76e79] fill-[#b76e79]"
+                  : "text-gray-600"
+              }
+            />
+          </div>
+
         </div>
 
-        <Link
-          to="/services"
-          className="text-orange-600 text-sm font-medium hover:underline"
-        >
-          View All
-        </Link>
 
-      </div>
+        {/* Content */}
+        <div className="p-4">
+
+          {/* Title */}
+          <h3 className="font-semibold text-black text-sm mb-2 group-hover:text-[#b76e79] transition-all duration-300">
+            {service.title}
+          </h3>
+
+          {/* City */}
+          <div className="flex items-center gap-1 text-gray-600 text-xs mb-2">
+
+            <MapPin size={14} className="text-[#c9a96e]" />
+
+            {service.city}
+
+          </div>
 
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Rating + Price */}
+          <div className="flex justify-between items-center">
 
-        {services.map((service) => (
+            {/* Rating */}
+            <div className="flex items-center gap-1 text-sm">
 
-          <div
-            key={service.id}
-            className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden group"
-          >
+              <Star size={14} className="text-[#d4af37] fill-[#d4af37]" />
 
-            {/* Image */}
-            <div className="relative h-[220px] overflow-hidden">
-
-              <img
-                src={service.image}
-                alt={service.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-              />
-
-              {/* Like Button */}
-              <div
-                onClick={() => toggleLike(service.id)}
-                className="absolute top-3 right-3 bg-white p-2 rounded-full shadow cursor-pointer"
-              >
-                <Heart
-                  size={18}
-                  className={
-                    liked.includes(service.id)
-                      ? "text-red-500 fill-red-500"
-                      : "text-gray-600"
-                  }
-                />
-              </div>
+              {service.rating}
 
             </div>
 
+            {/* Price */}
+            <div className="text-[#b76e79] font-semibold">
 
-            {/* Content */}
-            <div className="p-4">
-
-              {/* Title */}
-              <h3 className="font-medium text-sm mb-2">
-                {service.title}
-              </h3>
-
-              {/* City */}
-              <div className="flex items-center gap-1 text-gray-500 text-xs mb-2">
-
-                <MapPin size={14} />
-
-                {service.city}
-
-              </div>
-
-
-              {/* Rating + Price */}
-              <div className="flex justify-between items-center">
-
-                {/* Rating */}
-                <div className="flex items-center gap-1 text-sm">
-
-                  <Star size={14} className="text-yellow-500 fill-yellow-500" />
-
-                  {service.rating}
-
-                </div>
-
-                {/* Price */}
-                <div className="text-orange-600 font-semibold">
-
-                  ₹{service.price}
-
-                </div>
-
-              </div>
+              ₹{service.price}
 
             </div>
 
           </div>
 
-        ))}
+        </div>
 
       </div>
 
-    </section>
+    ))}
+
+  </div>
+
+</section>
   );
 }

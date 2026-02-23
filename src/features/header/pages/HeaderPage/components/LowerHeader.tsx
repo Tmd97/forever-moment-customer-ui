@@ -181,12 +181,30 @@ ${isOpen
           <div className="absolute right-0 top-0 h-full w-[85%] max-w-[380px] bg-white shadow-2xl p-5 overflow-y-auto">
 
             {/* Header */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg font-bold text-black">All Categories</h2>
-              <button onClick={() => setMobileMenuOpen(false)}>
-                <X size={22} />
-              </button>
-            </div>
+           <div className="flex justify-between items-center mb-6 
+  pb-3 border-b border-[#d4af37]/30">
+
+  <h2 className="text-lg font-bold 
+    bg-gradient-to-r from-[#b76e79] to-[#c9a96e] 
+    bg-clip-text text-transparent">
+    All Categories
+  </h2>
+
+  <button
+    onClick={() => setMobileMenuOpen(false)}
+    className="w-8 h-8 flex items-center justify-center 
+    rounded-md 
+    bg-gradient-to-r from-[#b76e79]/10 to-[#c9a96e]/10 
+    text-[#b76e79] 
+    hover:from-[#b76e79] hover:to-[#c9a96e] 
+    hover:text-white 
+    transition-all duration-300"
+  >
+    <X size={18} />
+  </button>
+
+
+</div>
 
             {/* Categories Vertical */}
             <div className="flex flex-col gap-3">

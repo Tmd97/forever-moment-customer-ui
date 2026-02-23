@@ -45,27 +45,19 @@ export default function PremiumHeroSlider() {
 
   const [index, setIndex] = useState(0);
   const [hovered, setHovered] = useState(false);
-
   const timeoutRef = useRef<any>(null);
 
-  // Auto slide with pause on hover
   useEffect(() => {
-
     if (hovered) return;
 
     timeoutRef.current = setTimeout(() => {
-
       setIndex((prev) =>
         prev === slides.length - 1 ? 0 : prev + 1
       );
-
     }, 5000);
 
     return () => clearTimeout(timeoutRef.current);
-
   }, [index, hovered]);
-
-
 
   const next = () => {
     setIndex(index === slides.length - 1 ? 0 : index + 1);
@@ -74,8 +66,6 @@ export default function PremiumHeroSlider() {
   const prev = () => {
     setIndex(index === 0 ? slides.length - 1 : index - 1);
   };
-
-
 
   return (
 
@@ -86,7 +76,6 @@ export default function PremiumHeroSlider() {
     >
 
       <AnimatePresence>
-
         <motion.div
           key={slides[index].id}
           initial={{ opacity: 0, scale: 1.1 }}
@@ -96,22 +85,20 @@ export default function PremiumHeroSlider() {
           className="absolute inset-0"
         >
 
-          {/* IMAGE */}
           <img
             src={slides[index].image}
             className="w-full h-full object-cover"
           />
 
-          {/* GRADIENT OVERLAY */}
+          {/* Golden Overlay */}
           <div className="
             absolute inset-0
             bg-gradient-to-r
-            from-black/70
-            via-black/40
-            to-transparent
+            from-black/75
+            via-black/50
+            to-black/20
           " />
 
-          {/* CONTENT */}
           <div className="
             absolute inset-0
             flex items-center
@@ -127,17 +114,15 @@ export default function PremiumHeroSlider() {
                 bg-white/10
                 p-8 rounded-2xl
                 max-w-xl
-                border border-white/20
+                border border-[#d4af37]/30
               "
             >
 
-              {/* Slide counter */}
-              <div className="text-orange-400 mb-2 text-sm">
+              {/* Counter */}
+              <div className="text-[#c9a96e] mb-2 text-sm font-medium">
                 {index + 1} / {slides.length}
               </div>
 
-
-              {/* Title */}
               <h1 className="
                 text-4xl md:text-6xl
                 font-bold text-white mb-4
@@ -145,8 +130,6 @@ export default function PremiumHeroSlider() {
                 {slides[index].title}
               </h1>
 
-
-              {/* Subtitle */}
               <p className="
                 text-white/90
                 mb-6 text-lg
@@ -154,29 +137,29 @@ export default function PremiumHeroSlider() {
                 {slides[index].subtitle}
               </p>
 
-
-              {/* Buttons */}
               <div className="flex gap-4">
 
                 <button className="
-                  bg-orange-500
-                  hover:bg-orange-600
+                  bg-gradient-to-r from-[#b76e79] to-[#c9a96e]
+                  hover:opacity-90
                   text-white
                   px-6 py-3 rounded-full
                   flex items-center gap-2
                   shadow-lg
+                  transition-all duration-300
                 ">
                   <Calendar size={18} />
                   Book Now
                 </button>
 
-
                 <button className="
                   bg-white/20
-                  hover:bg-white/30
+                  hover:bg-[#c9a96e]/20
                   text-white
                   px-6 py-3 rounded-full
                   backdrop-blur-md
+                  border border-[#d4af37]/30
+                  transition-all duration-300
                 ">
                   Explore
                 </button>
@@ -188,87 +171,72 @@ export default function PremiumHeroSlider() {
           </div>
 
         </motion.div>
-
       </AnimatePresence>
 
-
-
-      {/* LEFT ARROW */}
+      {/* Left Arrow */}
       <button
         onClick={prev}
         className="
           absolute left-6 top-1/2
           -translate-y-1/2
-          bg-white/20 hover:bg-white/40
+          bg-[#c9a96e]/20 hover:bg-[#c9a96e]/40
           backdrop-blur-md
           p-3 rounded-full
+          transition-all
         "
       >
         <ChevronLeft className="text-white" />
       </button>
 
-
-
-      {/* RIGHT ARROW */}
+      {/* Right Arrow */}
       <button
         onClick={next}
         className="
           absolute right-6 top-1/2
           -translate-y-1/2
-          bg-white/20 hover:bg-white/40
+          bg-[#c9a96e]/20 hover:bg-[#c9a96e]/40
           backdrop-blur-md
           p-3 rounded-full
+          transition-all
         "
       >
         <ChevronRight className="text-white" />
       </button>
 
-
-
-      {/* PROGRESS BAR */}
+      {/* Progress Bar */}
       <div className="
         absolute bottom-0 left-0
         w-full h-1 bg-white/20
       ">
-
         <motion.div
           key={index}
           initial={{ width: 0 }}
           animate={{ width: "100%" }}
           transition={{ duration: 5 }}
-          className="h-full bg-orange-500"
+          className="h-full bg-gradient-to-r from-[#b76e79] to-[#c9a96e]"
         />
-
       </div>
 
-
-
-      {/* DOTS */}
+      {/* Dots */}
       <div className="
         absolute bottom-6 left-1/2
         -translate-x-1/2
         flex gap-3
       ">
-
         {slides.map((_, i) => (
-
           <div
             key={i}
             onClick={() => setIndex(i)}
             className={`
-              w-3 h-3 rounded-full cursor-pointer
+              w-3 h-3 rounded-full cursor-pointer transition-all duration-300
               ${i === index
-                ? "bg-orange-500 scale-125"
+                ? "bg-gradient-to-r from-[#b76e79] to-[#c9a96e] scale-125"
                 : "bg-white/50"}
             `}
           />
-
         ))}
-
       </div>
 
     </section>
-
   );
-
 }

@@ -11,7 +11,7 @@ const CustomerLayout = () => {
       </div>
 
       {/* CONTENT WITH TOP SPACE */}
-      <main className="pt-[120px] relative z-0">
+      <main className="pt-[100px] relative z-0">
         <Outlet />
       </main>
       <Footer />

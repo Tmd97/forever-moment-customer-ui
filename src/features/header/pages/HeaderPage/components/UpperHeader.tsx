@@ -24,7 +24,7 @@ const UpperHeader = ({
   setShowLocationDropdown,
   selectedCity,
   setSelectedCity,
-  mobileMenuOpen,
+  // mobileMenuOpen,
   setMobileMenuOpen,
 }: UpperHeaderProps) => {
   const locationRef = useRef<HTMLDivElement>(null);
