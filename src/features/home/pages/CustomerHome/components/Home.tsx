@@ -3,6 +3,9 @@ import Slider from '@/features/slider/pages/SliderPage';
 import WhyChooseUs from '@/features/whyChooseUs/pages/WhyChooseUs/components/WhyChooseUs';
 import PackageCrousel from '@/features/Packages/pages/PackageCrousel';
 import FeaturedServices from '@/features/FeatureServices/pages/featureservice/components/FeatureServices';
+import BallonDecorPage from '@/features/BalloonDecor/pages/BallonDecorPage';
+import FeaturedPackagesCarousel from '@/features/Packages copy/pages/PackageCrousel/components/PackageCrousel';
+// import BallonDecorPage from '@/features/BalloonDecor/pages/BallonDecorPage';
 
 interface HomeProps {
     data: any;
@@ -35,12 +38,12 @@ const Home = ({ data, loading, error, getHomeData }: HomeProps) => {
     return (
         <div>
             <Slider />
-            {/* <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
-                {data?.message || 'Welcome'}
-            </h1> */}
+          <FeaturedPackagesCarousel/>
+           <BallonDecorPage/>
             <WhyChooseUs/>
             <FeaturedServices/>
             <PackageCrousel/>
+            
         </div>
 
     );

@@ -3,22 +3,20 @@ import '../../css/styles.scss';
 import UpperHeader from './UpperHeader';
 import LowerHeader from './LowerHeader';
 
-/* ─── Header Component ─── */
 interface HeaderProps {
     categories: any[];
     categoriesLoading: boolean;
     categoriesError?: string | null;
     getCategories: () => void;
-    isMenuOpen?: boolean;
-    searchQuery?: string;
-    toggleMenu?: () => void;
-    setSearchQuery?: (query: string) => void;
 }
 
 const Header = ({ categories, getCategories }: HeaderProps) => {
     const [scrolled, setScrolled] = useState(false);
     const [showLocationDropdown, setShowLocationDropdown] = useState(false);
     const [selectedCity, setSelectedCity] = useState('Vizag');
+
+    // 🔥 NEW STATE (mobile menu control)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         getCategories();
@@ -39,17 +37,23 @@ const Header = ({ categories, getCategories }: HeaderProps) => {
                         setShowLocationDropdown={setShowLocationDropdown}
                         selectedCity={selectedCity}
                         setSelectedCity={setSelectedCity}
+                        mobileMenuOpen={mobileMenuOpen}
+                        setMobileMenuOpen={setMobileMenuOpen}
                     />
                 </div>
             </header>
+
             <div className='lowerHeader'>
                 <div className='inner'>
-                    <LowerHeader categories={categories} />
+                    <LowerHeader
+                        categories={categories}
+                        mobileMenuOpen={mobileMenuOpen}
+                        setMobileMenuOpen={setMobileMenuOpen}
+                    />
                 </div>
             </div>
         </>
     );
-
 };
 
 export default Header;

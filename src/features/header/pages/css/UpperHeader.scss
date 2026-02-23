@@ -1,233 +1,233 @@
-@use '../../../styles/variables' as *;
-@use '../../../styles/mixins' as *;
+// @use '../../../styles/variables' as *;
+// @use '../../../styles/mixins' as *;
 
-.upperHeader {
+// .upperHeader {
 
-  background: $bg-main;
-  border-bottom: 1px solid $border-color;
+//   background: $bg-main;
+//   border-bottom: 1px solid $border-color;
 
-  position: sticky;
-  top: 0;
-  z-index: 999;
+//   position: sticky;
+//   top: 0;
+//   z-index: 999;
 
-}
+// }
 
-.headerInner {
+// .headerInner {
 
-  @include flex-between;
+//   @include flex-between;
 
-  height: 72px;
-}
+//   height: 72px;
+// }
 
 
-/* LOGO */
+// /* LOGO */
 
-.brandSection {
+// .brandSection {
 
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
+//   display: flex;
+//   align-items: center;
+//   gap: 12px;
+//   text-decoration: none;
 
-}
+// }
 
-.logo {
+// .logo {
 
-  height: 42px;
-}
+//   height: 42px;
+// }
 
 
-.brandName {
+// .brandName {
 
-  font-weight: 700;
-  font-size: 18px;
-  color: $text-main;
+//   font-weight: 700;
+//   font-size: 18px;
+//   color: $text-main;
 
-}
+// }
 
-.brandTagline {
+// .brandTagline {
 
-  font-size: 12px;
-  color: $text-light;
+//   font-size: 12px;
+//   color: $text-light;
 
-}
+// }
 
 
-/* SEARCH */
+// /* SEARCH */
 
-.searchContainer {
+// .searchContainer {
 
-  flex: 1;
-  display: flex;
-  justify-content: center;
+//   flex: 1;
+//   display: flex;
+//   justify-content: center;
 
-}
+// }
 
-.searchBox {
+// .searchBox {
 
-  display: flex;
-  align-items: center;
-  gap: 10px;
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
 
-  width: 100%;
-  max-width: 600px;
+//   width: 100%;
+//   max-width: 600px;
 
-  background: white;
-  padding: 10px 16px;
+//   background: white;
+//   padding: 10px 16px;
 
-  border-radius: $radius-lg;
+//   border-radius: $radius-lg;
 
-  box-shadow: $shadow-sm;
+//   box-shadow: $shadow-sm;
 
-}
+// }
 
 
-.searchInput {
+// .searchInput {
 
-  border: none;
-  outline: none;
+//   border: none;
+//   outline: none;
 
-  flex: 1;
+//   flex: 1;
 
-}
+// }
 
 
-.divider {
+// .divider {
 
-  width: 1px;
-  height: 24px;
-  background: $border-color;
+//   width: 1px;
+//   height: 24px;
+//   background: $border-color;
 
-}
+// }
 
 
-/* LOCATION */
+// /* LOCATION */
 
-.locationWrapper {
+// .locationWrapper {
 
-  position: relative;
+//   position: relative;
 
-}
+// }
 
-.locationButton {
+// .locationButton {
 
-  display: flex;
-  align-items: center;
-  gap: 6px;
+//   display: flex;
+//   align-items: center;
+//   gap: 6px;
 
-  cursor: pointer;
+//   cursor: pointer;
 
-}
+// }
 
 
-.locationDropdown {
+// .locationDropdown {
 
-  position: absolute;
+//   position: absolute;
 
-  top: 120%;
-  left: 0;
+//   top: 120%;
+//   left: 0;
 
-  background: white;
+//   background: white;
 
-  box-shadow: $shadow-lg;
+//   box-shadow: $shadow-lg;
 
-  border-radius: $radius-md;
+//   border-radius: $radius-md;
 
-  padding: 8px;
+//   padding: 8px;
 
-  width: 180px;
+//   width: 180px;
 
-}
+// }
 
 
-.cityItem {
+// .cityItem {
 
-  padding: 8px;
-  cursor: pointer;
+//   padding: 8px;
+//   cursor: pointer;
 
-  border-radius: $radius-sm;
+//   border-radius: $radius-sm;
 
-}
+// }
 
-.cityItem:hover {
+// .cityItem:hover {
 
-  background: rgba($primary, 0.1);
+//   background: rgba($primary, 0.1);
 
-  color: $primary;
+//   color: $primary;
 
-}
+// }
 
 
-/* RIGHT SIDE */
+// /* RIGHT SIDE */
 
-.headerActions {
+// .headerActions {
 
-  display: flex;
-  align-items: center;
-  gap: 14px;
+//   display: flex;
+//   align-items: center;
+//   gap: 14px;
 
-}
+// }
 
 
-.bookingBtn {
+// .bookingBtn {
 
-  padding: 8px 14px;
+//   padding: 8px 14px;
 
-  border-radius: $radius-md;
+//   border-radius: $radius-md;
 
-  border: 1px solid $primary;
+//   border: 1px solid $primary;
 
-  color: $primary;
+//   color: $primary;
 
-  transition: $transition;
+//   transition: $transition;
 
-}
+// }
 
-.bookingBtn:hover {
+// .bookingBtn:hover {
 
-  background: $primary;
-  color: white;
+//   background: $primary;
+//   color: white;
 
-}
+// }
 
 
-.loginBtn {
+// .loginBtn {
 
-  display: flex;
-  align-items: center;
-  gap: 6px;
+//   display: flex;
+//   align-items: center;
+//   gap: 6px;
 
-  background: $primary;
-  color: white;
+//   background: $primary;
+//   color: white;
 
-  padding: 8px 16px;
+//   padding: 8px 16px;
 
-  border-radius: $radius-md;
+//   border-radius: $radius-md;
 
-}
+// }
 
 
-.mobileMenuBtn {
+// .mobileMenuBtn {
 
-  display: none;
+//   display: none;
 
-}
+// }
 
 
-/* RESPONSIVE */
+// /* RESPONSIVE */
 
-@media(max-width: 768px) {
+// @media(max-width: 768px) {
 
-  .searchContainer {
+//   .searchContainer {
 
-    display: none;
+//     display: none;
 
-  }
+//   }
 
-  .mobileMenuBtn {
+//   .mobileMenuBtn {
 
-    display: block;
+//     display: block;
 
-  }
+//   }
 
-}
+// }

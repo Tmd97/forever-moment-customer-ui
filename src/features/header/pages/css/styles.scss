@@ -1,876 +1,876 @@
-@use '../../../../sass/variables' as vars;
-
-/* ─── Header Shell ─── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
-
-.stickyHeader {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    /* Subtle glow/shadow for depth */
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
-    transition: box-shadow 0.3s ease;
-    width: 100%;
-
-    &.scrolled {
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
-    }
-}
-
-.lowerHeader {
-    position: relative;
-    z-index: 90;
-    width: 100%;
-}
-
-
-.inner {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-/* ─── Top Row ─── */
-.topRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 1.5rem 0.5rem;
-    /* Increased top/bottom padding */
-    gap: 1.5rem;
-    /* Place above bottomRow */
-
-    /* Decorative Gradient Line */
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0));
-    }
-}
-
-/* ─── Bottom Row ─── */
-.bottomRow {
-    display: flex;
-    justify-content: center;
-    padding: 0.2rem 1.5rem;
-    background: rgba(255, 255, 255, 0.6);
-    position: relative;
-    /* For the gradient line */
-
-    /* Decorative Gradient Line (Navigation / Hero Separator) */
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        /* Very subtle gradient fading to transparent at edges */
-        background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(183, 110, 121, 0.15) 20%,
-                rgba(201, 169, 110, 0.15) 50%,
-                rgba(183, 110, 121, 0.15) 80%,
-                transparent 100%);
-    }
-}
-
-/* ─── Brand / Logo ─── */
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    text-decoration: none;
-    color: inherit;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-        opacity: 0.85;
-    }
-}
-
-.logoImg {
-    width: 32px;
-    /* Reduced from 40px */
-    height: 32px;
-    border-radius: 8px;
-    object-fit: contain;
-}
-
-.brandText {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
-
-.brandName {
-    font-size: 1.15rem;
-    /* Slightly reduced */
-    font-weight: 700;
-    background: linear-gradient(135deg, #b76e79, #c9a96e);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.02em;
-}
-
-.brandTagline {
-    font-size: 0.6rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: #999;
-}
-
-/* ─── Navigation ─── */
-.nav {
-    display: flex;
-    align-items: center;
-    gap: 0.125rem;
-}
-
-.navItem {
-    position: relative;
-}
-
-.navLink {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-family: 'Playfair Display', serif;
-    /* Premium font */
-    font-size: 0.95rem;
-    /* Slightly larger for readability */
-    font-weight: 400;
-    /* Lighter font weight */
-    color: #4a3b32;
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    /* Increased spacing (approx 0.8px) */
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-
-    >svg {
-        width: 13px;
-        /* Smaller, more delicate icons */
-        height: 13px;
-        opacity: 0.6;
-        transition: all 0.3s ease;
-        color: #8c7b65;
-    }
-
-    .chevron {
-        width: 10px;
-        height: 10px;
-        opacity: 0.4;
-        transition: transform 0.25s ease, opacity 0.2s ease;
-    }
-
-    &:hover,
-    &.active {
-        color: #b76e79;
-        background: rgba(183, 110, 121, 0.08);
-        /* Slightly clearer background */
-
-        >svg {
-            opacity: 1;
-            transform: scale(1.1);
-            color: #b76e79;
-            /* Icon follows text color */
-        }
-
-        .chevron {
-            opacity: 0.8;
-            transform: rotate(180deg);
-        }
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 2px;
-        /* Raised slightly */
-        left: 50%;
-        transform: translateX(-50%) scaleX(0);
-        width: 100%;
-        /* Full width of text */
-        height: 1px;
-        /* Thinner line */
-        background: currentColor;
-        /* Matches text color for subtlety, or specific gold/pink */
-        background: rgba(183, 110, 121, 0.5);
-        /* Subtle pink-gold */
-        border-radius: 2px;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        /* Smoother bezier */
-        opacity: 0.8;
-    }
-
-    &:hover,
-    &.active {
-        color: #b76e79;
-        /* Active color */
-        background: rgba(183, 110, 121, 0.04);
-        /* Very subtle background tint on hover */
-    }
-
-    &:hover::after,
-    &.active::after {
-        transform: translateX(-50%) scaleX(0.8);
-        /* Don't scale to full 100% of box, just text width approx */
-    }
-}
-
-/* ─── Search & Location Pill ─── */
-.searchBarContainer {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    max-width: 620px;
-    /* Reduced max-width slightly */
-}
-
-.searchPill {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    /* Gradient border trick only on focus/hover */
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    /* Default subtle border */
-    border-radius: 50px;
-    padding: 2px 4px;
-    width: 100%;
-    /* Deeper shadow */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    height: 38px;
-    /* Slightly taller for elegance */
-
-    &:hover,
-    &:focus-within {
-        /* Apply gradient border on interaction */
-        border: 1px solid transparent;
-        /* Hide default border - gradient will handle it with trick if needed or simple replacement */
-        /* Gradient border via background trick */
-        background-clip: padding-box, border-box;
-        background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, rgba(183, 110, 121, 0.4), rgba(201, 169, 110, 0.4));
-        background-origin: border-box;
-
-        box-shadow: 0 8px 24px rgba(183, 110, 121, 0.15);
-        /* Elevated shadow on hover */
-        transform: translateY(-1px);
-    }
-}
-
-.searchSection {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding-left: 0.8rem;
-
-    svg {
-        width: 16px;
-        /* Reduced icon size */
-        height: 16px;
-        color: #8c7b65;
-        flex-shrink: 0;
-    }
-}
-
-.searchInput {
-    width: 100%;
-    border: none;
-    background: transparent;
-    font-size: 0.85rem;
-    /* Reduced font size */
-    color: #4a3b32;
-    outline: none;
-    padding: 0;
-    /* Removed padding to center vertically */
-    height: 100%;
-
-    &::placeholder {
-        color: #999;
-    }
-}
-
-.divider {
-    width: 1px;
-    height: 18px;
-    /* Reduced height */
-    background: rgba(0, 0, 0, 0.08);
-    margin: 0 0.4rem;
-}
-
-.locationWrapper {
-    position: relative;
-    height: 100%;
-    margin-right: 0.2rem;
-}
-
-.locationSection {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: #fcfbf9;
-    /* Soft background */
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    padding: 0 0.8rem;
-    /* Increased padding */
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #4a3b32;
-    transition: all 0.2s ease;
-    border-radius: 20px;
-    height: 100%;
-
-    &:hover,
-    &.active {
-        background: #f7f5f2;
-        border-color: rgba(0, 0, 0, 0.08);
-    }
-
-    svg {
-        width: 14px;
-        height: 14px;
-        color: #b76e79;
-        /* Colored icon by default */
-    }
-}
-
-.locationDropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: -20px;
-    min-width: 180px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 0.5rem;
-    z-index: 1000;
-    list-style: none;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.cityItem {
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    color: #444;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: background 0.2s ease;
-
-    &:hover {
-        background: rgba(183, 110, 121, 0.05);
-        color: #b76e79;
-    }
-
-    &.selected {
-        font-weight: 600;
-        color: #b76e79;
-        background: rgba(183, 110, 121, 0.08);
-    }
-}
-
-.cityCheck {
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.gpsIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    /* Reduced size */
-    height: 28px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.03);
-    margin-right: 2px;
-    color: #8c7b65;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-        background: rgba(183, 110, 121, 0.1);
-        color: #b76e79;
-    }
-
-    svg {
-        width: 14px;
-        /* Reduced icon size */
-        height: 14px;
-    }
-}
-
-/* ─── Dropdown Panel ─── */
-.dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%) translateY(8px);
-    min-width: 340px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 0.3s;
-
-    &.open {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: translateX(-50%) translateY(0);
-    }
-
-    /* Bridge to prevent gap hover-out */
-    &::before {
-        content: '';
-        position: absolute;
-        top: -12px;
-        left: 0;
-        right: 0;
-        height: 12px;
-    }
-
-    /* ── Multi-column variants ── */
-    &.cols-1 {
-        min-width: 240px;
-    }
-
-    &.cols-2 {
-        min-width: 480px;
-
-        .dropdownList {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0 1rem;
-        }
-    }
-
-    &.cols-3 {
-        min-width: 720px;
-
-        .dropdownList {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0 1rem;
-        }
-    }
-
-    &.cols-4 {
-        min-width: 960px;
-
-        .dropdownList {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0 1rem;
-        }
-    }
-
-    &.cols-5 {
-        min-width: 1200px;
-
-        .dropdownList {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 0 1rem;
-        }
-    }
-
-    &.cols-6 {
-        min-width: 1400px;
-
-        .dropdownList {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 0 1rem;
-        }
-    }
-}
-
-.dropdownInner {
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border-radius: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.1),
-        0 8px 24px rgba(0, 0, 0, 0.06),
-        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-    overflow: hidden;
-}
-
-.dropdownHeader {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1.25rem 1.25rem 0.75rem;
-
-    h3 {
-        margin: 0;
-    }
-}
-
-.dropdownIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(183, 110, 121, 0.12), rgba(201, 169, 110, 0.12));
-    color: #b76e79;
-    flex-shrink: 0;
-
-    svg {
-        width: 20px;
-        height: 20px;
-    }
-}
-
-.dropdownTitle {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    letter-spacing: -0.01em;
-}
-
-.dropdownDesc {
-    font-size: 0.75rem;
-    color: #888;
-    margin: 0.125rem 0 0;
-}
-
-.dropdownDivider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(183, 110, 121, 0.15), transparent);
-    margin: 0.5rem 1.25rem;
-}
-
-.dropdownList {
-    list-style: none;
-    margin: 0;
-    padding: 0.25rem 0.5rem;
-}
-
-.dropdownItem {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    border-radius: 12px;
-    text-decoration: none;
-    color: inherit;
-    transition: background 0.2s ease, transform 0.15s ease;
-
-    &:hover {
-        background: linear-gradient(135deg, rgba(183, 110, 121, 0.05), rgba(201, 169, 110, 0.05));
-        transform: translateX(2px);
-
-        .dropdownItemArrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .dropdownItemName {
-            color: #b76e79;
-        }
-    }
-}
-
-.dropdownItemInfo {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-    min-width: 0;
-}
-
-.dropdownItemName {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #333;
-    transition: color 0.2s ease;
-}
-
-.dropdownItemDesc {
-    font-size: 0.72rem;
-    color: #999;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.dropdownItemPrice {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #b76e79;
-    white-space: nowrap;
-    background: linear-gradient(135deg, rgba(183, 110, 121, 0.08), rgba(201, 169, 110, 0.08));
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-}
-
-.dropdownItemArrow {
-    display: flex;
-    align-items: center;
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    color: #b76e79;
-
-    svg {
-        width: 14px;
-        height: 14px;
-    }
-}
-
-.dropdownFooter {
-    padding: 0.5rem 1.25rem 1rem;
-}
-
-.dropdownViewAll {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(135deg, #b76e79, #c9a96e);
-    border-radius: 10px;
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 10px rgba(183, 110, 121, 0.25);
-
-    svg {
-        width: 14px;
-        height: 14px;
-    }
-
-    &:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 16px rgba(183, 110, 121, 0.35);
-    }
-}
-
-/* ─── Actions (right side) ─── */
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.iconBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: transparent;
-    color: #666;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
-
-    svg {
-        width: 20px;
-        height: 20px;
-    }
-
-    &:hover {
-        background: rgba(183, 110, 121, 0.08);
-        color: #b76e79;
-        transform: scale(1.05);
-    }
-}
-
-.loginBtn {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    /* Tighter gap */
-    padding: 0.5rem 1.25rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #fff;
-    /* Smoother, premium gradient */
-    background: linear-gradient(135deg, #c57e89, #d4b47d);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-    /* Softer shadow */
-    box-shadow: 0 4px 15px rgba(183, 110, 121, 0.25);
-    text-decoration: none;
-
-    svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    &:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 20px rgba(183, 110, 121, 0.35);
-        opacity: 0.98;
-    }
-
-    &:active {
-        transform: translateY(0);
-    }
-}
-
-/* ─── Mobile hamburger (hidden on desktop) ─── */
-.mobileToggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    border: none;
-    background: transparent;
-    color: #555;
-    cursor: pointer;
-
-    svg {
-        width: 22px;
-        height: 22px;
-    }
-}
-
-/* ── Responsive ── */
-/* ── Responsive ── */
-@media (max-width: 768px) {
-    .stickyHeader {
-        position: relative;
-        /* Unstick on mobile if content is tall */
-    }
-
-    .inner {
-        padding: 0;
-        height: auto;
-    }
-
-    /* Top Row Layout */
-    .topRow {
-        flex-wrap: wrap;
-        gap: 1rem;
-        padding: 1rem;
-    }
-
-    .brand {
-        order: 1;
-    }
-
-    .actions {
-        order: 2;
-        margin-left: auto;
-    }
-
-    .searchBarContainer {
-        order: 3;
-        width: 100%;
-        max-width: 100%;
-        margin-top: 0.5rem;
-    }
-
-    .searchPill {
-        height: 44px;
-        /* Larger touch target */
-    }
-
-    .brandTagline {
-        display: none;
-    }
-
-    /* Bottom Row (Navigation) */
-    .bottomRow {
-        justify-content: flex-start;
-        padding: 0 1rem;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-
-        /* Hide Scrollbar */
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-
-    .nav {
-        display: flex;
-        gap: 0.5rem;
-        padding: 0.8rem 0;
-        white-space: nowrap;
-    }
-
-    .navLink {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.8rem;
-        background: rgba(0, 0, 0, 0.03);
-        border-radius: 20px;
-
-        &::after {
-            display: none;
-            /* Remove underline effect on mobile */
-        }
-
-        &.active,
-        &:hover {
-            background: rgba(183, 110, 121, 0.1);
-        }
-    }
-
-    /* Disable large dropdowns on mobile for now, or style them differently */
-    .dropdown {
-        display: none !important;
-    }
-
-    .mobileToggle {
-        display: none;
-        /* We are not using the drawer anymore */
-    }
-}
+// @use '../../../../sass/variables' as vars;
+
+// /* ─── Header Shell ─── */
+// @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+// .stickyHeader {
+//     position: sticky;
+//     top: 0;
+//     z-index: 100;
+//     background: rgba(255, 255, 255, 0.95);
+//     backdrop-filter: blur(20px) saturate(180%);
+//     -webkit-backdrop-filter: blur(20px) saturate(180%);
+//     border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+//     /* Subtle glow/shadow for depth */
+//     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
+//     transition: box-shadow 0.3s ease;
+//     width: 100%;
+
+//     &.scrolled {
+//         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+//     }
+// }
+
+// // .lowerHeader {
+// //     position: relative;
+// //     z-index: 90;
+// //     width: 100%;
+// // }
+
+
+// .inner {
+//     width: 100%;
+//     margin: 0;
+//     padding: 0;
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// /* ─── Top Row ─── */
+// .topRow {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     padding: 0.5rem 1.5rem 0.5rem;
+//     /* Increased top/bottom padding */
+//     gap: 1.5rem;
+//     /* Place above bottomRow */
+
+//     /* Decorative Gradient Line */
+//     &::after {
+//         content: '';
+//         position: absolute;
+//         bottom: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 1px;
+//         background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0));
+//     }
+// }
+
+// /* ─── Bottom Row ─── */
+// .bottomRow {
+//     display: flex;
+//     justify-content: center;
+//     padding: 0.2rem 1.5rem;
+//     background: rgba(255, 255, 255, 0.6);
+//     position: relative;
+//     /* For the gradient line */
+
+//     /* Decorative Gradient Line (Navigation / Hero Separator) */
+//     &::after {
+//         content: '';
+//         position: absolute;
+//         bottom: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 1px;
+//         /* Very subtle gradient fading to transparent at edges */
+//         background: linear-gradient(90deg,
+//                 transparent 0%,
+//                 rgba(183, 110, 121, 0.15) 20%,
+//                 rgba(201, 169, 110, 0.15) 50%,
+//                 rgba(183, 110, 121, 0.15) 80%,
+//                 transparent 100%);
+//     }
+// }
+
+// /* ─── Brand / Logo ─── */
+// .brand {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.6rem;
+//     text-decoration: none;
+//     color: inherit;
+//     transition: opacity 0.2s ease;
+
+//     &:hover {
+//         opacity: 0.85;
+//     }
+// }
+
+// .logoImg {
+//     width: 32px;
+//     /* Reduced from 40px */
+//     height: 32px;
+//     border-radius: 8px;
+//     object-fit: contain;
+// }
+
+// .brandText {
+//     display: flex;
+//     flex-direction: column;
+//     line-height: 1.1;
+// }
+
+// .brandName {
+//     font-size: 1.15rem;
+//     /* Slightly reduced */
+//     font-weight: 700;
+//     background: linear-gradient(135deg, #b76e79, #c9a96e);
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: transparent;
+//     background-clip: text;
+//     letter-spacing: -0.02em;
+// }
+
+// .brandTagline {
+//     font-size: 0.6rem;
+//     font-weight: 500;
+//     text-transform: uppercase;
+//     letter-spacing: 0.12em;
+//     color: #999;
+// }
+
+// /* ─── Navigation ─── */
+// .nav {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.125rem;
+// }
+
+// .navItem {
+//     position: relative;
+// }
+
+// .navLink {
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+//     gap: 0.5rem;
+//     padding: 0.5rem 1rem;
+//     font-family: 'Playfair Display', serif;
+//     /* Premium font */
+//     font-size: 0.95rem;
+//     /* Slightly larger for readability */
+//     font-weight: 400;
+//     /* Lighter font weight */
+//     color: #4a3b32;
+//     text-decoration: none;
+//     letter-spacing: 0.05em;
+//     /* Increased spacing (approx 0.8px) */
+//     border-radius: 8px;
+//     transition: all 0.3s ease;
+//     cursor: pointer;
+
+//     >svg {
+//         width: 13px;
+//         /* Smaller, more delicate icons */
+//         height: 13px;
+//         opacity: 0.6;
+//         transition: all 0.3s ease;
+//         color: #8c7b65;
+//     }
+
+//     .chevron {
+//         width: 10px;
+//         height: 10px;
+//         opacity: 0.4;
+//         transition: transform 0.25s ease, opacity 0.2s ease;
+//     }
+
+//     &:hover,
+//     &.active {
+//         color: #b76e79;
+//         background: rgba(183, 110, 121, 0.08);
+//         /* Slightly clearer background */
+
+//         >svg {
+//             opacity: 1;
+//             transform: scale(1.1);
+//             color: #b76e79;
+//             /* Icon follows text color */
+//         }
+
+//         .chevron {
+//             opacity: 0.8;
+//             transform: rotate(180deg);
+//         }
+//     }
+
+//     &::after {
+//         content: '';
+//         position: absolute;
+//         bottom: 2px;
+//         /* Raised slightly */
+//         left: 50%;
+//         transform: translateX(-50%) scaleX(0);
+//         width: 100%;
+//         /* Full width of text */
+//         height: 1px;
+//         /* Thinner line */
+//         background: currentColor;
+//         /* Matches text color for subtlety, or specific gold/pink */
+//         background: rgba(183, 110, 121, 0.5);
+//         /* Subtle pink-gold */
+//         border-radius: 2px;
+//         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+//         /* Smoother bezier */
+//         opacity: 0.8;
+//     }
+
+//     &:hover,
+//     &.active {
+//         color: #b76e79;
+//         /* Active color */
+//         background: rgba(183, 110, 121, 0.04);
+//         /* Very subtle background tint on hover */
+//     }
+
+//     &:hover::after,
+//     &.active::after {
+//         transform: translateX(-50%) scaleX(0.8);
+//         /* Don't scale to full 100% of box, just text width approx */
+//     }
+// }
+
+// /* ─── Search & Location Pill ─── */
+// .searchBarContainer {
+//     flex: 1;
+//     display: flex;
+//     justify-content: center;
+//     max-width: 620px;
+//     /* Reduced max-width slightly */
+// }
+
+// .searchPill {
+//     display: flex;
+//     align-items: center;
+//     background: #fff;
+//     /* Gradient border trick only on focus/hover */
+//     border: 1px solid rgba(0, 0, 0, 0.08);
+//     /* Default subtle border */
+//     border-radius: 50px;
+//     padding: 2px 4px;
+//     width: 100%;
+//     /* Deeper shadow */
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
+//     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+//     height: 38px;
+//     /* Slightly taller for elegance */
+
+//     &:hover,
+//     &:focus-within {
+//         /* Apply gradient border on interaction */
+//         border: 1px solid transparent;
+//         /* Hide default border - gradient will handle it with trick if needed or simple replacement */
+//         /* Gradient border via background trick */
+//         background-clip: padding-box, border-box;
+//         background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, rgba(183, 110, 121, 0.4), rgba(201, 169, 110, 0.4));
+//         background-origin: border-box;
+
+//         box-shadow: 0 8px 24px rgba(183, 110, 121, 0.15);
+//         /* Elevated shadow on hover */
+//         transform: translateY(-1px);
+//     }
+// }
+
+// .searchSection {
+//     flex: 1;
+//     display: flex;
+//     align-items: center;
+//     gap: 0.5rem;
+//     padding-left: 0.8rem;
+
+//     svg {
+//         width: 16px;
+//         /* Reduced icon size */
+//         height: 16px;
+//         color: #8c7b65;
+//         flex-shrink: 0;
+//     }
+// }
+
+// .searchInput {
+//     width: 100%;
+//     border: none;
+//     background: transparent;
+//     font-size: 0.85rem;
+//     /* Reduced font size */
+//     color: #4a3b32;
+//     outline: none;
+//     padding: 0;
+//     /* Removed padding to center vertically */
+//     height: 100%;
+
+//     &::placeholder {
+//         color: #999;
+//     }
+// }
+
+// .divider {
+//     width: 1px;
+//     height: 18px;
+//     /* Reduced height */
+//     background: rgba(0, 0, 0, 0.08);
+//     margin: 0 0.4rem;
+// }
+
+// .locationWrapper {
+//     position: relative;
+//     height: 100%;
+//     margin-right: 0.2rem;
+// }
+
+// .locationSection {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.3rem;
+//     background: #fcfbf9;
+//     /* Soft background */
+//     border: 1px solid rgba(0, 0, 0, 0.04);
+//     padding: 0 0.8rem;
+//     /* Increased padding */
+//     cursor: pointer;
+//     font-size: 0.85rem;
+//     font-weight: 600;
+//     color: #4a3b32;
+//     transition: all 0.2s ease;
+//     border-radius: 20px;
+//     height: 100%;
+
+//     &:hover,
+//     &.active {
+//         background: #f7f5f2;
+//         border-color: rgba(0, 0, 0, 0.08);
+//     }
+
+//     svg {
+//         width: 14px;
+//         height: 14px;
+//         color: #b76e79;
+//         /* Colored icon by default */
+//     }
+// }
+
+// .locationDropdown {
+//     position: absolute;
+//     top: calc(100% + 8px);
+//     right: -20px;
+//     min-width: 180px;
+//     background: #fff;
+//     border-radius: 12px;
+//     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+//     border: 1px solid rgba(0, 0, 0, 0.06);
+//     padding: 0.5rem;
+//     z-index: 1000;
+//     list-style: none;
+//     margin: 0;
+//     display: flex;
+//     flex-direction: column;
+//     animation: fadeIn 0.2s ease;
+// }
+
+// @keyframes fadeIn {
+//     from {
+//         opacity: 0;
+//         transform: translateY(-5px);
+//     }
+
+//     to {
+//         opacity: 1;
+//         transform: translateY(0);
+//     }
+// }
+
+// .cityItem {
+//     padding: 0.6rem 1rem;
+//     border-radius: 8px;
+//     font-size: 0.85rem;
+//     color: #444;
+//     cursor: pointer;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     transition: background 0.2s ease;
+
+//     &:hover {
+//         background: rgba(183, 110, 121, 0.05);
+//         color: #b76e79;
+//     }
+
+//     &.selected {
+//         font-weight: 600;
+//         color: #b76e79;
+//         background: rgba(183, 110, 121, 0.08);
+//     }
+// }
+
+// .cityCheck {
+//     font-size: 0.8rem;
+//     font-weight: bold;
+// }
+
+// .gpsIcon {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 28px;
+//     /* Reduced size */
+//     height: 28px;
+//     border-radius: 50%;
+//     background: rgba(0, 0, 0, 0.03);
+//     margin-right: 2px;
+//     color: #8c7b65;
+//     cursor: pointer;
+//     transition: all 0.2s ease;
+
+//     &:hover {
+//         background: rgba(183, 110, 121, 0.1);
+//         color: #b76e79;
+//     }
+
+//     svg {
+//         width: 14px;
+//         /* Reduced icon size */
+//         height: 14px;
+//     }
+// }
+
+// /* ─── Dropdown Panel ─── */
+// .dropdown {
+//     position: absolute;
+//     top: calc(100% + 8px);
+//     left: 50%;
+//     transform: translateX(-50%) translateY(8px);
+//     min-width: 340px;
+//     opacity: 0;
+//     visibility: hidden;
+//     pointer-events: none;
+//     transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+//         transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+//         visibility 0.3s;
+
+//     &.open {
+//         opacity: 1;
+//         visibility: visible;
+//         pointer-events: auto;
+//         transform: translateX(-50%) translateY(0);
+//     }
+
+//     /* Bridge to prevent gap hover-out */
+//     &::before {
+//         content: '';
+//         position: absolute;
+//         top: -12px;
+//         left: 0;
+//         right: 0;
+//         height: 12px;
+//     }
+
+//     /* ── Multi-column variants ── */
+//     &.cols-1 {
+//         min-width: 240px;
+//     }
+
+//     &.cols-2 {
+//         min-width: 480px;
+
+//         .dropdownList {
+//             display: grid;
+//             grid-template-columns: repeat(2, 1fr);
+//             gap: 0 1rem;
+//         }
+//     }
+
+//     &.cols-3 {
+//         min-width: 720px;
+
+//         .dropdownList {
+//             display: grid;
+//             grid-template-columns: repeat(3, 1fr);
+//             gap: 0 1rem;
+//         }
+//     }
+
+//     &.cols-4 {
+//         min-width: 960px;
+
+//         .dropdownList {
+//             display: grid;
+//             grid-template-columns: repeat(4, 1fr);
+//             gap: 0 1rem;
+//         }
+//     }
+
+//     &.cols-5 {
+//         min-width: 1200px;
+
+//         .dropdownList {
+//             display: grid;
+//             grid-template-columns: repeat(5, 1fr);
+//             gap: 0 1rem;
+//         }
+//     }
+
+//     &.cols-6 {
+//         min-width: 1400px;
+
+//         .dropdownList {
+//             display: grid;
+//             grid-template-columns: repeat(6, 1fr);
+//             gap: 0 1rem;
+//         }
+//     }
+// }
+
+// .dropdownInner {
+//     background: rgba(255, 255, 255, 0.98);
+//     backdrop-filter: blur(24px) saturate(200%);
+//     -webkit-backdrop-filter: blur(24px) saturate(200%);
+//     border-radius: 16px;
+//     border: 1px solid rgba(0, 0, 0, 0.06);
+//     box-shadow:
+//         0 20px 60px rgba(0, 0, 0, 0.1),
+//         0 8px 24px rgba(0, 0, 0, 0.06),
+//         0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+//     overflow: hidden;
+// }
+
+// .dropdownHeader {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.75rem;
+//     padding: 1.25rem 1.25rem 0.75rem;
+
+//     h3 {
+//         margin: 0;
+//     }
+// }
+
+// .dropdownIcon {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 40px;
+//     height: 40px;
+//     border-radius: 12px;
+//     background: linear-gradient(135deg, rgba(183, 110, 121, 0.12), rgba(201, 169, 110, 0.12));
+//     color: #b76e79;
+//     flex-shrink: 0;
+
+//     svg {
+//         width: 20px;
+//         height: 20px;
+//     }
+// }
+
+// .dropdownTitle {
+//     font-size: 0.95rem;
+//     font-weight: 700;
+//     color: #1a1a1a;
+//     letter-spacing: -0.01em;
+// }
+
+// .dropdownDesc {
+//     font-size: 0.75rem;
+//     color: #888;
+//     margin: 0.125rem 0 0;
+// }
+
+// .dropdownDivider {
+//     height: 1px;
+//     background: linear-gradient(90deg, transparent, rgba(183, 110, 121, 0.15), transparent);
+//     margin: 0.5rem 1.25rem;
+// }
+
+// .dropdownList {
+//     list-style: none;
+//     margin: 0;
+//     padding: 0.25rem 0.5rem;
+// }
+
+// .dropdownItem {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.75rem;
+//     padding: 0.75rem;
+//     border-radius: 12px;
+//     text-decoration: none;
+//     color: inherit;
+//     transition: background 0.2s ease, transform 0.15s ease;
+
+//     &:hover {
+//         background: linear-gradient(135deg, rgba(183, 110, 121, 0.05), rgba(201, 169, 110, 0.05));
+//         transform: translateX(2px);
+
+//         .dropdownItemArrow {
+//             opacity: 1;
+//             transform: translateX(0);
+//         }
+
+//         .dropdownItemName {
+//             color: #b76e79;
+//         }
+//     }
+// }
+
+// .dropdownItemInfo {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.125rem;
+//     min-width: 0;
+// }
+
+// .dropdownItemName {
+//     font-size: 0.85rem;
+//     font-weight: 600;
+//     color: #333;
+//     transition: color 0.2s ease;
+// }
+
+// .dropdownItemDesc {
+//     font-size: 0.72rem;
+//     color: #999;
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+// }
+
+// .dropdownItemPrice {
+//     font-size: 0.78rem;
+//     font-weight: 700;
+//     color: #b76e79;
+//     white-space: nowrap;
+//     background: linear-gradient(135deg, rgba(183, 110, 121, 0.08), rgba(201, 169, 110, 0.08));
+//     padding: 0.2rem 0.6rem;
+//     border-radius: 20px;
+// }
+
+// .dropdownItemArrow {
+//     display: flex;
+//     align-items: center;
+//     opacity: 0;
+//     transform: translateX(-4px);
+//     transition: opacity 0.2s ease, transform 0.2s ease;
+//     color: #b76e79;
+
+//     svg {
+//         width: 14px;
+//         height: 14px;
+//     }
+// }
+
+// .dropdownFooter {
+//     padding: 0.5rem 1.25rem 1rem;
+// }
+
+// .dropdownViewAll {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 0.4rem;
+//     padding: 0.6rem 1rem;
+//     font-size: 0.8rem;
+//     font-weight: 600;
+//     color: #fff;
+//     background: linear-gradient(135deg, #b76e79, #c9a96e);
+//     border-radius: 10px;
+//     text-decoration: none;
+//     transition: transform 0.2s ease, box-shadow 0.2s ease;
+//     box-shadow: 0 2px 10px rgba(183, 110, 121, 0.25);
+
+//     svg {
+//         width: 14px;
+//         height: 14px;
+//     }
+
+//     &:hover {
+//         transform: translateY(-1px);
+//         box-shadow: 0 4px 16px rgba(183, 110, 121, 0.35);
+//     }
+// }
+
+// /* ─── Actions (right side) ─── */
+// .actions {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.75rem;
+// }
+
+// .iconBtn {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 40px;
+//     height: 40px;
+//     border-radius: 50%;
+//     border: none;
+//     background: transparent;
+//     color: #666;
+//     cursor: pointer;
+//     transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+
+//     svg {
+//         width: 20px;
+//         height: 20px;
+//     }
+
+//     &:hover {
+//         background: rgba(183, 110, 121, 0.08);
+//         color: #b76e79;
+//         transform: scale(1.05);
+//     }
+// }
+
+// .loginBtn {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.4rem;
+//     /* Tighter gap */
+//     padding: 0.5rem 1.25rem;
+//     font-size: 0.875rem;
+//     font-weight: 600;
+//     color: #fff;
+//     /* Smoother, premium gradient */
+//     background: linear-gradient(135deg, #c57e89, #d4b47d);
+//     border: none;
+//     border-radius: 50px;
+//     cursor: pointer;
+//     transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+//     /* Softer shadow */
+//     box-shadow: 0 4px 15px rgba(183, 110, 121, 0.25);
+//     text-decoration: none;
+
+//     svg {
+//         width: 16px;
+//         height: 16px;
+//     }
+
+//     &:hover {
+//         transform: translateY(-1px);
+//         box-shadow: 0 6px 20px rgba(183, 110, 121, 0.35);
+//         opacity: 0.98;
+//     }
+
+//     &:active {
+//         transform: translateY(0);
+//     }
+// }
+
+// /* ─── Mobile hamburger (hidden on desktop) ─── */
+// .mobileToggle {
+//     display: none;
+//     align-items: center;
+//     justify-content: center;
+//     width: 40px;
+//     height: 40px;
+//     border-radius: 8px;
+//     border: none;
+//     background: transparent;
+//     color: #555;
+//     cursor: pointer;
+
+//     svg {
+//         width: 22px;
+//         height: 22px;
+//     }
+// }
+
+// /* ── Responsive ── */
+// /* ── Responsive ── */
+// @media (max-width: 768px) {
+//     .stickyHeader {
+//         position: relative;
+//         /* Unstick on mobile if content is tall */
+//     }
+
+//     .inner {
+//         padding: 0;
+//         height: auto;
+//     }
+
+//     /* Top Row Layout */
+//     .topRow {
+//         flex-wrap: wrap;
+//         gap: 1rem;
+//         padding: 1rem;
+//     }
+
+//     .brand {
+//         order: 1;
+//     }
+
+//     .actions {
+//         order: 2;
+//         margin-left: auto;
+//     }
+
+//     .searchBarContainer {
+//         order: 3;
+//         width: 100%;
+//         max-width: 100%;
+//         margin-top: 0.5rem;
+//     }
+
+//     .searchPill {
+//         height: 44px;
+//         /* Larger touch target */
+//     }
+
+//     .brandTagline {
+//         display: none;
+//     }
+
+//     /* Bottom Row (Navigation) */
+//     .bottomRow {
+//         justify-content: flex-start;
+//         padding: 0 1rem;
+//         overflow-x: auto;
+//         -webkit-overflow-scrolling: touch;
+//         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+//         /* Hide Scrollbar */
+//         &::-webkit-scrollbar {
+//             display: none;
+//         }
+
+//         -ms-overflow-style: none;
+//         scrollbar-width: none;
+//     }
+
+//     .nav {
+//         display: flex;
+//         gap: 0.5rem;
+//         padding: 0.8rem 0;
+//         white-space: nowrap;
+//     }
+
+//     .navLink {
+//         font-size: 0.9rem;
+//         padding: 0.5rem 0.8rem;
+//         background: rgba(0, 0, 0, 0.03);
+//         border-radius: 20px;
+
+//         &::after {
+//             display: none;
+//             /* Remove underline effect on mobile */
+//         }
+
+//         &.active,
+//         &:hover {
+//             background: rgba(183, 110, 121, 0.1);
+//         }
+//     }
+
+//     /* Disable large dropdowns on mobile for now, or style them differently */
+//     .dropdown {
+//         display: none !important;
+//     }
+
+//     .mobileToggle {
+//         display: none;
+//         /* We are not using the drawer anymore */
+//     }
+// }

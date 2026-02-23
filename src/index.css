@@ -4,6 +4,15 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ----------------------*******************************-------------- */
+.custom-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 body {
   width: 100%;
   overflow-x: hidden;
