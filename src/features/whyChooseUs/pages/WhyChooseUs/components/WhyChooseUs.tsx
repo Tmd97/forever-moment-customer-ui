@@ -30,64 +30,70 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-orange-50 py-14">
-
-      <div className="max-w-7xl mx-auto px-6">
-
+    <section className="py-[var(--section-padding-y)] bg-gray-50">
+      <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Heading */}
-        <div className="text-center mb-10">
-
-          <h2 className="text-2xl md:text-3xl font-semibold mb-2">
+        <div className="text-center mb-14">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-3 text-black">
             Why Choose Forever Moment
           </h2>
 
           <p className="text-gray-600 text-sm">
             We make your special moments unforgettable
           </p>
-
         </div>
 
-
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => {
-
             const Icon = feature.icon;
 
             return (
               <div
                 key={index}
-                className="bg-white rounded-xl p-6 shadow hover:shadow-lg transition group cursor-pointer"
+                className="
+                  bg-white
+                  rounded-2xl
+                  p-8
+                  border border-[var(--primary-light)]/10
+                  shadow-[var(--shadow-soft)]
+                  hover:shadow-[var(--shadow-gold)]
+                  transition-all duration-300
+                  group
+                "
               >
-
                 {/* Icon */}
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-orange-100 text-orange-600 mb-4 group-hover:scale-110 transition">
-
-                  <Icon size={24} />
-
+                <div
+                  className="
+                    w-14 h-14
+                    flex items-center justify-center
+                    rounded-xl
+                    bg-[var(--primary-light)]/10
+                    text-[var(--primary)]
+                    mb-5
+                    transition-transform duration-300
+                    group-hover:scale-110
+                  "
+                >
+                  <Icon size={26} />
                 </div>
 
-
                 {/* Title */}
-                <h3 className="font-semibold mb-2">
+                <h3 className="font-semibold text-black mb-3 text-base">
                   {feature.title}
                 </h3>
 
-
                 {/* Description */}
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {feature.desc}
                 </p>
-
               </div>
             );
           })}
-
         </div>
 
       </div>
-
     </section>
   );
 }

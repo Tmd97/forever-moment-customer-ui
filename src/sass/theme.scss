@@ -1,28 +1,99 @@
-@use './variables' as *;
+/* =====================================================
+   🎉 GOLDEN CELEBRATION THEME (Global Design Tokens)
+   For Event Decoration Website
+===================================================== */
+
+
+/* ===============================
+   🎨 COLORS
+================================= */
+
+$primary: #d4af37;
+$primary-dark: #b8962e;
+$primary-light: #f3d77a;
+
+$bg-main: #fff8e7;      // Soft cream background
+$bg-white: #ffffff;
+
+$text-main: #1a1a1a;
+$text-light: #666666;
+
+$border-light: #eeeeee;
+
+
+/* ===============================
+   📏 SPACING (8px System)
+================================= */
+
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$space-2xl: 48px;
+$space-3xl: 64px;
+
+
+/* ===============================
+   📦 CONTAINER
+================================= */
+
+$container-width: 1200px;
+$container-padding: 16px;
+
+
+/* ===============================
+   🔵 RADIUS
+================================= */
+
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 20px;
+
+
+/* ===============================
+   🌫 SHADOW
+================================= */
+
+$shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.05);
+$shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.08);
+$shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.25);
+
+
+
+/* =====================================================
+   🔥 CSS VARIABLES (For Tailwind Usage)
+   Now you can use these with var(--primary)
+===================================================== */
+
+// .section {
+//   padding: var(--section-padding-y) 0;
+// }
+
+// .section + .section {
+//   margin-top: var(--section-gap);
+// }
+
 
 :root {
+  --primary: #{$primary};
+//   --section-gap: 80px;
+  --primary-dark: #{$primary-dark};
+  --primary-light: #{$primary-light};
 
-  /* PRIMARY THEME */
-  --primary: #{$color-primary};
-  --primary-light: #{$color-secondary};
+  --bg-main: #{$bg-main};
+  --bg-white: #{$bg-white};
+   --section-padding-y: 80px;
+  --container-width: 1200px;
 
-  /* BACKGROUND */
-  --bg-main: #{$color-white};
-  --bg-light: #{$color-gray-50};
+  --text-main: #{$text-main};
+  --text-light: #{$text-light};
 
-  /* TEXT */
-  --text-main: #{$color-gray-900};
-  --text-light: #{$color-gray-600};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
 
-  /* BORDER */
-  --border-color: #{$color-gray-200};
+  --shadow-soft: #{$shadow-soft};
+  --shadow-gold: #{$shadow-gold};
 
-  /* SHADOW */
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
-
-  /* RADIUS */
-  --radius-md: 10px;
-  --radius-lg: 14px;
-
+  --container-width: #{$container-width};
 }

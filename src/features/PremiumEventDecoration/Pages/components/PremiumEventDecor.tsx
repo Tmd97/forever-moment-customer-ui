@@ -9,7 +9,6 @@ import service7 from "@/assets/services/service7.webp";
 import service8 from "@/assets/services/service8.webp";
 import service9 from "@/assets/services/service9.webp";
 import service10 from "@/assets/services/service10.webp";
-// You can add more images up to 20
 
 const services = [
   { name: "Love Theme", image: service1 },
@@ -22,33 +21,68 @@ const services = [
   { name: "Graduation Party", image: service8 },
   { name: "Baby Shower", image: service9 },
   { name: "Engagement Party", image: service10 },
-  
 ];
 
 export default function ProductCatalog() {
   return (
-    <div className="max-w-[1400px] mx-auto px-4 py-10 container">
-      <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8">Our Services</h2>
+    <section className="py-[var(--section-padding-y)] bg-white">
+      <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Heading */}
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-black">
+          Our Services
+        </h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {services.map((service, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-          >
-            <div className="overflow-hidden">
-              <img
-                src={service.image}
-                alt={service.name}
-                className="w-full h-40 sm:h-48 md:h-40 lg:h-44 object-cover transform transition-transform duration-300 hover:scale-105"
-              />
+        {/* Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="
+                bg-white
+                rounded-2xl
+                overflow-hidden
+                border border-[var(--primary-light)]/10
+                shadow-[var(--shadow-soft)]
+                hover:shadow-[var(--shadow-gold)]
+                transition-all duration-300
+                cursor-pointer
+                group
+              "
+            >
+              {/* Image */}
+              <div className="overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.name}
+                  className="
+                    w-full
+                    h-40 sm:h-48 md:h-40 lg:h-44
+                    object-cover
+                    transition-transform duration-500
+                    group-hover:scale-105
+                  "
+                />
+              </div>
+
+              {/* Name */}
+              <div className="text-center py-3 px-2">
+                <p className="
+                  text-sm sm:text-base
+                  font-medium
+                  text-black
+                  group-hover:text-[var(--primary)]
+                  transition-colors duration-300
+                ">
+                  {service.name}
+                </p>
+              </div>
+
             </div>
-            <div className="text-center py-2 px-1">
-              <p className="text-sm sm:text-base font-sans font-medium">{service.name}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from '@/features/header/pages/HeaderPage';
 import Footer from '@/components/navigation/footer';
+import FloatingBookingCTA from '@/components/FloatingBookingCTA/FloatingBooking';
 
 const CustomerLayout = () => {
   return (
@@ -11,8 +12,9 @@ const CustomerLayout = () => {
       </div>
 
       {/* CONTENT WITH TOP SPACE */}
-      <main className="pt-[100px] relative z-0">
+      <main className="pt-[60px] md:pt-[120px] relative z-0">
         <Outlet />
+        <FloatingBookingCTA/>
       </main>
       <Footer />
     </div>

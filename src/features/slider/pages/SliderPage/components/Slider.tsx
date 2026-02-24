@@ -70,7 +70,7 @@ export default function PremiumHeroSlider() {
   return (
 
     <section
-      className="relative h-[85vh] w-full overflow-hidden"
+      className="relative min-h-[85vh] w-full overflow-hidden"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -94,15 +94,15 @@ export default function PremiumHeroSlider() {
           <div className="
             absolute inset-0
             bg-gradient-to-r
-            from-black/75
-            via-black/50
-            to-black/20
+from-black/70
+via-black/55
+to-black/30
           " />
 
           <div className="
             absolute inset-0
             flex items-center
-            max-w-7xl mx-auto px-6
+            max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8
           ">
 
             <motion.div
@@ -111,15 +111,17 @@ export default function PremiumHeroSlider() {
               transition={{ delay: 0.3 }}
               className="
                 backdrop-blur-md
-                bg-white/10
-                p-8 rounded-2xl
-                max-w-xl
-                border border-[#d4af37]/30
+bg-white/10
+p-8 sm:p-10
+rounded-2xl
+max-w-xl
+border border-[var(--primary-light)]/40
+shadow-[var(--shadow-soft)]
               "
             >
 
               {/* Counter */}
-              <div className="text-[#c9a96e] mb-2 text-sm font-medium">
+              <div className="text-[var(--primary-light)] mb-2 text-sm font-medium">
                 {index + 1} / {slides.length}
               </div>
 
@@ -140,25 +142,25 @@ export default function PremiumHeroSlider() {
               <div className="flex gap-4">
 
                 <button className="
-                  bg-gradient-to-r from-[#b76e79] to-[#c9a96e]
-                  hover:opacity-90
-                  text-white
-                  px-6 py-3 rounded-full
-                  flex items-center gap-2
-                  shadow-lg
-                  transition-all duration-300
-                ">
+bg-[var(--primary)]
+hover:bg-[var(--primary-dark)]
+text-white
+px-6 py-3 rounded-full
+flex items-center gap-2
+shadow-[var(--shadow-gold)]
+transition-all duration-300
+">
                   <Calendar size={18} />
                   Book Now
                 </button>
 
                 <button className="
                   bg-white/20
-                  hover:bg-[#c9a96e]/20
+                  hover:bg-[var(--primary-light)]/20
                   text-white
                   px-6 py-3 rounded-full
                   backdrop-blur-md
-                  border border-[#d4af37]/30
+                  border border-[var(--primary-light)]/40
                   transition-all duration-300
                 ">
                   Explore
@@ -179,7 +181,8 @@ export default function PremiumHeroSlider() {
         className="
           absolute left-6 top-1/2
           -translate-y-1/2
-          bg-[#c9a96e]/20 hover:bg-[#c9a96e]/40
+          bg-[var(--primary)]/20
+hover:bg-[var(--primary)]/40
           backdrop-blur-md
           p-3 rounded-full
           transition-all
@@ -194,7 +197,8 @@ export default function PremiumHeroSlider() {
         className="
           absolute right-6 top-1/2
           -translate-y-1/2
-          bg-[#c9a96e]/20 hover:bg-[#c9a96e]/40
+          bg-[var(--primary)]/20
+hover:bg-[var(--primary)]/40
           backdrop-blur-md
           p-3 rounded-full
           transition-all
@@ -213,7 +217,7 @@ export default function PremiumHeroSlider() {
           initial={{ width: 0 }}
           animate={{ width: "100%" }}
           transition={{ duration: 5 }}
-          className="h-full bg-gradient-to-r from-[#b76e79] to-[#c9a96e]"
+          className="h-full bg-[var(--primary)]"
         />
       </div>
 
@@ -230,7 +234,7 @@ export default function PremiumHeroSlider() {
             className={`
               w-3 h-3 rounded-full cursor-pointer transition-all duration-300
               ${i === index
-                ? "bg-gradient-to-r from-[#b76e79] to-[#c9a96e] scale-125"
+                ? "bg-[var(--primary)] scale-125"
                 : "bg-white/50"}
             `}
           />

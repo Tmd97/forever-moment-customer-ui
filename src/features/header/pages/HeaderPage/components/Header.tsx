@@ -30,7 +30,7 @@ const Header = ({ categories, getCategories }: HeaderProps) => {
 
     return (
         <>
-            <header className={`stickyHeader ${scrolled ? 'scrolled' : ''}`}>
+            <header className={`stickyHeader  ${scrolled ? 'scrolled' : ''}`}>
                 <div className='inner'>
                     <UpperHeader
                         showLocationDropdown={showLocationDropdown}

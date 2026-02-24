@@ -39,71 +39,73 @@ const packages = [
 ];
 
 export default function FeaturedPackagesCarousel() {
-
   return (
+    <section className="py-[var(--section-padding-y)] bg-white">
+      <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Heading */}
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">
+          Featured Packages
+        </h2>
 
-    <section className="py-20 bg-white">
+        {/* Horizontal Scroll */}
+        <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-2">
+          {packages.map((pkg) => (
+            <motion.div
+              key={pkg.id}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+              className="
+                min-w-[280px] md:min-w-[300px]
+                bg-white
+                rounded-2xl
+                border border-[var(--primary-light)]/20
+                shadow-[var(--shadow-soft)]
+                hover:shadow-[var(--shadow-gold)]
+                overflow-hidden
+                cursor-pointer
+                transition-all duration-300
+              "
+            >
+              {/* Image */}
+              <div className="h-[200px] overflow-hidden">
+                <img
+                  src={pkg.image}
+                  alt={pkg.name}
+                  className="w-full h-full object-cover hover:scale-110 transition duration-500"
+                />
+              </div>
 
-  <div className="max-w-7xl mx-auto px-6">
+              {/* Content */}
+              <div className="p-5">
+                <h3 className="font-semibold text-lg text-black mb-2">
+                  {pkg.name}
+                </h3>
 
-    <h2 className="text-4xl font-bold mb-10 text-black">
-      Featured Packages
-    </h2>
+                <p className="text-[var(--primary)] font-semibold mb-4">
+                  {pkg.price}
+                </p>
 
-    <div className="flex gap-6 overflow-x-auto scrollbar-hide">
+                <button
+                  className="
+                    w-full
+                    bg-[var(--primary)]
+                    hover:bg-[var(--primary-dark)]
+                    text-white
+                    py-2.5
+                    rounded-lg
+                    transition-all duration-300
+                    shadow-[var(--shadow-soft)]
+                  "
+                >
+                  View Details
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-      {packages.map((pkg) => (
-
-        <motion.div
-          key={pkg.id}
-          whileHover={{ scale: 1.08 }}
-          className="min-w-[280px] bg-white rounded-2xl 
-          shadow-lg hover:shadow-2xl 
-          border border-[#d4af37]/20
-          overflow-hidden cursor-pointer 
-          transition-all duration-300"
-        >
-
-          <div className="h-[200px] overflow-hidden">
-
-            <img
-              src={pkg.image}
-              className="w-full h-full object-cover hover:scale-110 transition duration-500"
-            />
-
-          </div>
-
-          <div className="p-4">
-
-            <h3 className="font-bold text-lg text-black group-hover:text-[#b76e79]">
-              {pkg.name}
-            </h3>
-
-            <p className="text-[#b76e79] font-semibold">
-              {pkg.price}
-            </p>
-
-            <button className="mt-3 w-full 
-              bg-gradient-to-r from-[#b76e79] to-[#d4af37] 
-              text-white py-2 rounded-lg 
-              hover:opacity-90 
-              transition-all duration-300
-              shadow-md">
-              View Details
-            </button>
-
-          </div>
-
-        </motion.div>
-
-      ))}
-
-    </div>
-
-  </div>
-
-</section>
-
+      </div>
+    </section>
   );
-
 }

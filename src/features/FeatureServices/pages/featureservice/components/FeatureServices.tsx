@@ -71,115 +71,128 @@ export default function FeaturedServices() {
   };
 
   return (
-   <section className="max-w-7xl mx-auto px-6 py-12">
-
-  {/* Heading */}
-  <div className="flex justify-between items-center mb-6">
-
-    <div>
-      <h2 className="text-2xl font-semibold text-black">
-        Featured Services
-      </h2>
-
-      <p className="text-gray-600 text-sm">
-        Most popular decoration services
-      </p>
-    </div>
-
-    <Link
-      to="/services"
-      className="text-[#b76e79] text-sm font-medium hover:text-[#c9a96e] transition-all duration-300"
-    >
-      View All
-    </Link>
-
-  </div>
-
-
-  {/* Grid */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-    {services.map((service) => (
-
-      <div
-        key={service.id}
-        className="bg-white rounded-xl shadow hover:shadow-xl transition-all duration-300 overflow-hidden group border border-[#d4af37]/10"
-      >
-
-        {/* Image */}
-        <div className="relative h-[220px] overflow-hidden">
-
-          <img
-            src={service.image}
-            alt={service.title}
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-          />
-
-          {/* Like Button */}
-          <div
-            onClick={() => toggleLike(service.id)}
-            className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow cursor-pointer hover:bg-[#b76e79]/10 transition-all"
-          >
-            <Heart
-              size={18}
-              className={
-                liked.includes(service.id)
-                  ? "text-[#b76e79] fill-[#b76e79]"
-                  : "text-gray-600"
-              }
-            />
+    <section className="py-[var(--section-padding-y)] bg-white">
+      <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Heading */}
+        <div className="flex justify-between items-center mb-10">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-semibold text-black mb-2">
+              Featured Services
+            </h2>
+            <p className="text-gray-600 text-sm">
+              Most popular decoration services
+            </p>
           </div>
 
+          <Link
+            to="/services"
+            className="
+              text-[var(--primary)]
+              text-sm font-medium
+              hover:text-[var(--primary-dark)]
+              transition-all duration-300
+            "
+          >
+            View All
+          </Link>
         </div>
 
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <div
+              key={service.id}
+              className="
+                bg-white
+                rounded-2xl
+                border border-[var(--primary-light)]/10
+                shadow-[var(--shadow-soft)]
+                hover:shadow-[var(--shadow-gold)]
+                transition-all duration-300
+                overflow-hidden
+                group
+              "
+            >
+              {/* Image */}
+              <div className="relative h-[220px] overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                />
 
-        {/* Content */}
-        <div className="p-4">
+                {/* Like Button */}
+                <div
+                  onClick={() => toggleLike(service.id)}
+                  className="
+                    absolute top-3 right-3
+                    bg-white/90
+                    backdrop-blur-sm
+                    p-2 rounded-full
+                    shadow-[var(--shadow-soft)]
+                    cursor-pointer
+                    hover:bg-[var(--primary-light)]/10
+                    transition-all
+                  "
+                >
+                  <Heart
+                    size={18}
+                    className={
+                      liked.includes(service.id)
+                        ? "text-[var(--primary)] fill-[var(--primary)]"
+                        : "text-gray-600"
+                    }
+                  />
+                </div>
+              </div>
 
-          {/* Title */}
-          <h3 className="font-semibold text-black text-sm mb-2 group-hover:text-[#b76e79] transition-all duration-300">
-            {service.title}
-          </h3>
+              {/* Content */}
+              <div className="p-5">
+                {/* Title */}
+                <h3 className="
+                  font-semibold
+                  text-black
+                  text-base
+                  mb-3
+                  group-hover:text-[var(--primary)]
+                  transition-all duration-300
+                ">
+                  {service.title}
+                </h3>
 
-          {/* City */}
-          <div className="flex items-center gap-1 text-gray-600 text-xs mb-2">
+                {/* City */}
+                <div className="flex items-center gap-1 text-gray-600 text-sm mb-3">
+                  <MapPin
+                    size={14}
+                    className="text-[var(--primary-light)]"
+                  />
+                  {service.city}
+                </div>
 
-            <MapPin size={14} className="text-[#c9a96e]" />
+                {/* Rating + Price */}
+                <div className="flex justify-between items-center">
+                  
+                  {/* Rating */}
+                  <div className="flex items-center gap-1 text-sm">
+                    <Star
+                      size={14}
+                      className="text-[var(--primary-light)] fill-[var(--primary-light)]"
+                    />
+                    {service.rating}
+                  </div>
 
-            {service.city}
-
-          </div>
-
-
-          {/* Rating + Price */}
-          <div className="flex justify-between items-center">
-
-            {/* Rating */}
-            <div className="flex items-center gap-1 text-sm">
-
-              <Star size={14} className="text-[#d4af37] fill-[#d4af37]" />
-
-              {service.rating}
-
+                  {/* Price */}
+                  <div className="text-[var(--primary)] font-semibold">
+                    ₹{service.price}
+                  </div>
+                </div>
+              </div>
             </div>
-
-            {/* Price */}
-            <div className="text-[#b76e79] font-semibold">
-
-              ₹{service.price}
-
-            </div>
-
-          </div>
-
+          ))}
         </div>
 
       </div>
-
-    ))}
-
-  </div>
-
-</section>
+    </section>
   );
 }
