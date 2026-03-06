@@ -3,6 +3,7 @@ import { PublicRoute } from './Public';
 
 // Customer routes
 import { homeRoutes } from '@/features/home/pages/routes';
+import { ExperienceRoutes } from '@/features/Experiences/pages/experienceDetails/routes';
 
 /**
  * Main application router configuration
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
         element: <PublicRoute />,
         children: [
             ...homeRoutes,
+            ...ExperienceRoutes
         ],
     },
 

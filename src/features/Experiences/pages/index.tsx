@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import { toggleMenu, setSearchQuery, getCategories } from '@/features/header/store/actions';
 import type { RootState } from '@/store/store';
-import ExperienceDetails from './components/ExperienceDetails';
-import FeaturedServices from './components/FeatureServices';
+import ExperienceDetails from './experienceDetails/ExperienceDetails';
 
 const mapStateToProps = (state: RootState) => ({
     isMenuOpen: state.header?.isMenuOpen,
@@ -18,4 +17,4 @@ const mapDispatchToProps = {
     getCategories,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FeaturedServices);
+export default connect(mapStateToProps, mapDispatchToProps)(ExperienceDetails);

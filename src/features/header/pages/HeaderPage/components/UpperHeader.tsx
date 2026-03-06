@@ -9,6 +9,7 @@ import {
 } from './HeaderIcons';
 import { dummyCities } from './HeaderData';
 
+
 interface UpperHeaderProps {
   showLocationDropdown: boolean;
   setShowLocationDropdown: (show: boolean) => void;
@@ -157,12 +158,12 @@ const UpperHeader = ({
       {/* RIGHT SIDE */}
       <div className="flex items-center gap-3 sm:gap-6 shrink-0">
         {/* Help Center (hidden on mobile) */}
-        <Link
+        {/* <Link
           to="/help"
           className="hidden sm:block text-sm font-medium text-[var(--text-main)] hover:text-[var(--primary)] transition"
         >
           Help Center
-        </Link>
+        </Link> */}
 
         {/* Login Button */}
         <Link
@@ -190,6 +191,7 @@ transition-all duration-200"
     <MenuIcon />
   </span>
 </button>
+
       </div>
     </div>
   );

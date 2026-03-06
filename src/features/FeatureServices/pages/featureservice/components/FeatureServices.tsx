@@ -73,7 +73,7 @@ export default function FeaturedServices() {
   return (
     <section className="py-[var(--section-padding-y)] bg-white">
       <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Heading */}
         <div className="flex justify-between items-center mb-10">
           <div>
@@ -87,12 +87,7 @@ export default function FeaturedServices() {
 
           <Link
             to="/services"
-            className="
-              text-[var(--primary)]
-              text-sm font-medium
-              hover:text-[var(--primary-dark)]
-              transition-all duration-300
-            "
+            className="text-[var(--primary)] text-sm font-medium hover:text-[var(--primary-dark)]"
           >
             View All
           </Link>
@@ -100,96 +95,79 @@ export default function FeaturedServices() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
           {services.map((service) => (
-            <div
+            <Link
               key={service.id}
-              className="
-                bg-white
-                rounded-2xl
-                border border-[var(--primary-light)]/10
-                shadow-[var(--shadow-soft)]
-                hover:shadow-[var(--shadow-gold)]
-                transition-all duration-300
-                overflow-hidden
-                group
-              "
+              to={`experience/${service.id}`}
             >
-              {/* Image */}
-              <div className="relative h-[220px] overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                />
 
-                {/* Like Button */}
-                <div
-                  onClick={() => toggleLike(service.id)}
-                  className="
-                    absolute top-3 right-3
-                    bg-white/90
-                    backdrop-blur-sm
-                    p-2 rounded-full
-                    shadow-[var(--shadow-soft)]
-                    cursor-pointer
-                    hover:bg-[var(--primary-light)]/10
-                    transition-all
-                  "
-                >
-                  <Heart
-                    size={18}
-                    className={
-                      liked.includes(service.id)
-                        ? "text-[var(--primary)] fill-[var(--primary)]"
-                        : "text-gray-600"
-                    }
+              <div className="bg-white rounded-2xl border border-[var(--primary-light)]/10 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-gold)] transition-all duration-300 overflow-hidden group cursor-pointer">
+
+                {/* Image */}
+                <div className="relative h-[220px] overflow-hidden">
+
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                   />
-                </div>
-              </div>
 
-              {/* Content */}
-              <div className="p-5">
-                {/* Title */}
-                <h3 className="
-                  font-semibold
-                  text-black
-                  text-base
-                  mb-3
-                  group-hover:text-[var(--primary)]
-                  transition-all duration-300
-                ">
-                  {service.title}
-                </h3>
-
-                {/* City */}
-                <div className="flex items-center gap-1 text-gray-600 text-sm mb-3">
-                  <MapPin
-                    size={14}
-                    className="text-[var(--primary-light)]"
-                  />
-                  {service.city}
-                </div>
-
-                {/* Rating + Price */}
-                <div className="flex justify-between items-center">
-                  
-                  {/* Rating */}
-                  <div className="flex items-center gap-1 text-sm">
-                    <Star
-                      size={14}
-                      className="text-[var(--primary-light)] fill-[var(--primary-light)]"
+                  {/* Like Button */}
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleLike(service.id);
+                    }}
+                    className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-[var(--shadow-soft)] cursor-pointer"
+                  >
+                    <Heart
+                      size={18}
+                      className={
+                        liked.includes(service.id)
+                          ? "text-[var(--primary)] fill-[var(--primary)]"
+                          : "text-gray-600"
+                      }
                     />
-                    {service.rating}
                   </div>
 
-                  {/* Price */}
-                  <div className="text-[var(--primary)] font-semibold">
-                    ₹{service.price}
-                  </div>
                 </div>
+
+                {/* Content */}
+                <div className="p-5">
+
+                  <h3 className="font-semibold text-black text-base mb-3 group-hover:text-[var(--primary)]">
+                    {service.title}
+                  </h3>
+
+                  <div className="flex items-center gap-1 text-gray-600 text-sm mb-3">
+                    <MapPin size={14} className="text-[var(--primary-light)]" />
+                    {service.city}
+                  </div>
+
+                  <div className="flex justify-between items-center">
+
+                    <div className="flex items-center gap-1 text-sm">
+                      <Star
+                        size={14}
+                        className="text-[var(--primary-light)] fill-[var(--primary-light)]"
+                      />
+                      {service.rating}
+                    </div>
+
+                    <div className="text-[var(--primary)] font-semibold">
+                      ₹{service.price}
+                    </div>
+
+                  </div>
+
+                </div>
+
               </div>
-            </div>
+
+            </Link>
           ))}
+
         </div>
 
       </div>

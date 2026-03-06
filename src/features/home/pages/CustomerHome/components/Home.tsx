@@ -9,7 +9,10 @@ import ProductCatalog from "@/features/PremiumEventDecoration/Pages/components/P
 import Testimonials from "@/features/Packages/pages/PackageCrousel/components/Testimonials";
 import EventThemesPreview from "@/features/BalloonDecor/pages/BallonDecorPage/components/EventThemesPreview";
 import BeforeAfterSlider from "@/features/BeforeAfterSlide/pages/components/BeforeAfterSlide";
-// import PackageCrousel from '@/features/Packages copy/pages/PackageCrousel';
+import QuickHighlights from "@/components/QuickHighlight/QuickHighlight";
+import ExperienceDetails from "@/features/Experiences/pages/experienceDetails/ExperienceDetails";
+import GiftSlider from "@/components/GiftSlider/GiftSlider";
+
 
 interface HomeProps {
   data: any;
@@ -41,7 +44,10 @@ const Home = ({ data, loading, error, getHomeData }: HomeProps) => {
 
   return (
     <div>
+      <ExperienceDetails/>
       <Slider />
+      
+      <QuickHighlights/>
       <BeforeAfterSlider/>
       <FeaturedPackagesCarousel />
       <FeaturedServices />
@@ -49,6 +55,7 @@ const Home = ({ data, loading, error, getHomeData }: HomeProps) => {
       <EventThemesPreview/>
 
       <ProductCatalog />
+      <GiftSlider/>
       <WhyChooseUs />
       <Testimonials />
       {/* <PackageCrousel/> */}

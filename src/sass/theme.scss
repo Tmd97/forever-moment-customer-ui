@@ -8,7 +8,7 @@
    🎨 COLORS
 ================================= */
 
-$primary: #d4af37;
+$primary: red;
 $primary-dark: #b8962e;
 $primary-light: #f3d77a;
 
@@ -66,13 +66,6 @@ $shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.25);
    Now you can use these with var(--primary)
 ===================================================== */
 
-// .section {
-//   padding: var(--section-padding-y) 0;
-// }
-
-// .section + .section {
-//   margin-top: var(--section-gap);
-// }
 
 
 :root {
@@ -96,4 +89,47 @@ $shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.25);
   --shadow-gold: #{$shadow-gold};
 
   --container-width: #{$container-width};
+}
+
+/* ===============================
+   🌙 ROYAL DARK MODE
+================================= */
+
+[data-theme="dark"] {
+  --bg-main: #0f0f0f;
+  --bg-white: #1a1a1a;
+
+  --text-main: #f5f5f5;
+  --text-light: #bbbbbb;
+
+  --primary: #d4af37;
+  --primary-dark: #b8962e;
+  --primary-light: #f3d77a;
+
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.35);
+}
+/* =====================================
+   🌙 ROYAL DARK MODE OVERRIDES
+===================================== */
+
+[data-theme="dark"] {
+  --bg-main: #0f0f0f;
+  --bg-white: #1a1a1a;
+
+  --text-main: #f5f5f5;
+  --text-light: #bbbbbb;
+
+  --primary: #d4af37;
+  --primary-dark: #b8962e;
+  --primary-light: #f3d77a;
+
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.35);
+}
+
+/* Smooth transition only for theme colors */
+body {
+  transition: background-color 0.3s ease,
+              color 0.3s ease;
 }

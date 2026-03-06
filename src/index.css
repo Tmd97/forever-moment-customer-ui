@@ -18,7 +18,12 @@ body {
   overflow-x: hidden;
   /* horizontal off */
   overflow-y: auto;
+  transition: background 0.4s ease, color 0.4s ease;
   /* vertical ON */
+}
+
+* {
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* For .scrollbar-hide  */
@@ -42,6 +47,49 @@ body {
 
 .pulse-gold {
   animation: goldPulse 2.5s infinite;
+}
+
+/* Subtle Gold Shimmer */
+.shimmer-icon::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -60%;
+  width: 40%;
+  height: 140%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: shimmerMove 3s infinite;
+}
+
+@keyframes shimmerMove {
+  0% {
+    left: -60%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+/* Gradient Underline */
+.gradient-underline {
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(
+    to right,
+    var(--primary),
+    var(--primary-light)
+  );
+  transition: width 0.4s ease;
+}
+
+.group:hover .gradient-underline {
+  width: 100%;
 }
 /* ---------------------------**************************------------------- */
 
