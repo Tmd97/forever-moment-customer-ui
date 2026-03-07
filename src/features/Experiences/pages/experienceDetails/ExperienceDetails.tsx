@@ -8,6 +8,9 @@ import WhyUs from "./components/WhyUs";
 import FAQ from "./components/FAQ";
 import RelatedExperiences from "./components/RelatedExperiences";
 import GiftSlider from "@/components/GiftSlider/GiftSlider";
+import NeedToKnow from "./components/NeedToKnow";
+import AboutExperience from "./components/AboutExperience";
+import CanecellationPolicy from "./components/CanecellationPolicy";
 
 export default function ExperienceDetails() {
 
@@ -107,6 +110,36 @@ export default function ExperienceDetails() {
           >
             WhyUs
           </button>
+           <button
+            onClick={()=>setActiveTab("NeedToKnow")}
+            className={`pb-3 font-medium ${
+              activeTab==="NeedToKnow"
+              ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
+              : "text-gray-500"
+            }`}
+          >
+            NeedToKnow
+          </button>
+          <button
+            onClick={()=>setActiveTab("AboutExperience")}
+            className={`pb-3 font-medium ${
+              activeTab==="AboutExperience"
+              ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
+              : "text-gray-500"
+            }`}
+          >
+            AboutExperience
+          </button>
+           <button
+            onClick={()=>setActiveTab("CanecellationPolicy")}
+            className={`pb-3 font-medium ${
+              activeTab==="CanecellationPolicy"
+              ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
+              : "text-gray-500"
+            }`}
+          >
+            CanecellationPolicy
+          </button>
 
         </div>
 
@@ -121,6 +154,9 @@ export default function ExperienceDetails() {
 
           {activeTab==="faq" && <FAQ/>}
           {activeTab==="WhyUs" && <WhyUs/>}
+           {activeTab==="NeedToKnow" && <NeedToKnow/>}
+            {activeTab==="AboutExperience" && <AboutExperience/>}
+            {activeTab==="CanecellationPolicy" && <CanecellationPolicy/>}
 
         </div>
 
