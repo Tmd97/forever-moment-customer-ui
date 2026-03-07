@@ -83,20 +83,7 @@ const UpperHeader = ({
 
       {/* CENTER SEARCH */}
       <div className="flex flex-1 justify-center">
-       <div
-  className="
-  w-full
-  max-w-[180px] sm:max-w-xs md:max-w-md lg:max-w-xl
-  flex items-center
-  bg-[var(--bg-white)]
-  rounded-full
-  px-4 py-2
-  border border-[var(--border-light)]
-  shadow-[var(--shadow-soft)]
-  focus-within:ring-2 focus-within:ring-[var(--primary)]
-  transition-all duration-300
-"
->
+       <div className="input-search max-w-[180px] sm:max-w-xs md:max-w-md lg:max-w-xl">
           {/* Search Input */}
           <div className="flex items-center gap-2 flex-1">
             <div className="w-px h-4 bg-[var(--border-light)] mx-3">
@@ -105,12 +92,12 @@ const UpperHeader = ({
             <input
               type="text"
               placeholder="Search..."
-              className="w-full bg-transparent outline-none text-xs sm:text-sm text-gray-700 placeholder-gray-400"
+              className="w-full bg-transparent outline-none text-xs sm:text-sm text-[color:var(--text-main)] placeholder-gray-400"
             />
           </div>
 
           {/* Divider */}
-          <div className="w-px h-4 bg-[#b76e7925] mx-2 sm:mx-3" />
+          <div className="w-px h-4 bg-[var(--primary-light)] mx-2 sm:mx-3 opacity-50" />
 
           {/* Location Dropdown */}
           <div className="relative" ref={locationRef}>
@@ -168,24 +155,14 @@ const UpperHeader = ({
         {/* Login Button */}
         <Link
           to="/login"
-          className="px-4 py-2 text-sm font-semibold rounded-full
-bg-[var(--primary)]
-text-white
-shadow-[var(--shadow-soft)]
-hover:bg-[var(--primary-dark)]
-hover:shadow-[var(--shadow-gold)]
-transition-all duration-300"
+          className="btn-primary !px-6 !py-2 text-sm"
         >
           Login
         </Link>
 
      <button
   onClick={() => setMobileMenuOpen(true)}
-  className="lg:hidden flex items-center justify-center w-9 h-9 rounded-md
-bg-[var(--bg-white)]
-border border-[var(--primary-light)]
-shadow-sm hover:shadow-md
-transition-all duration-200"
+  className="lg:hidden btn-icon !w-9 !h-9 !rounded-md"
 >
   <span className="w-5 h-5 text-[var(--primary)]">
     <MenuIcon />

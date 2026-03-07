@@ -8,11 +8,11 @@
    🎨 COLORS
 ================================= */
 
-$primary: red;
+$primary: goldenrod;
 $primary-dark: #b8962e;
 $primary-light: #f3d77a;
 
-$bg-main: #fff8e7;      // Soft cream background
+$bg-main: #fff8e7; // Soft cream background
 $bg-white: #ffffff;
 
 $text-main: #1a1a1a;
@@ -69,26 +69,26 @@ $shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.25);
 
 
 :root {
-  --primary: #{$primary};
-//   --section-gap: 80px;
-  --primary-dark: #{$primary-dark};
-  --primary-light: #{$primary-light};
+   --primary: #{$primary};
+   //   --section-gap: 80px;
+   --primary-dark: #{$primary-dark};
+   --primary-light: #{$primary-light};
 
-  --bg-main: #{$bg-main};
-  --bg-white: #{$bg-white};
+   --bg-main: #{$bg-main};
+   --bg-white: #{$bg-white};
    --section-padding-y: 80px;
-  --container-width: 1200px;
+   --container-width: 1200px;
 
-  --text-main: #{$text-main};
-  --text-light: #{$text-light};
+   --text-main: #{$text-main};
+   --text-light: #{$text-light};
 
-  --radius-md: #{$radius-md};
-  --radius-lg: #{$radius-lg};
+   --radius-md: #{$radius-md};
+   --radius-lg: #{$radius-lg};
 
-  --shadow-soft: #{$shadow-soft};
-  --shadow-gold: #{$shadow-gold};
+   --shadow-soft: #{$shadow-soft};
+   --shadow-gold: #{$shadow-gold};
 
-  --container-width: #{$container-width};
+   --container-width: #{$container-width};
 }
 
 /* ===============================
@@ -96,40 +96,41 @@ $shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.25);
 ================================= */
 
 [data-theme="dark"] {
-  --bg-main: #0f0f0f;
-  --bg-white: #1a1a1a;
+   --bg-main: #0f0f0f;
+   --bg-white: #1a1a1a;
 
-  --text-main: #f5f5f5;
-  --text-light: #bbbbbb;
+   --text-main: #f5f5f5;
+   --text-light: #bbbbbb;
 
-  --primary: #d4af37;
-  --primary-dark: #b8962e;
-  --primary-light: #f3d77a;
+   --primary: #d4af37;
+   --primary-dark: #b8962e;
+   --primary-light: #f3d77a;
 
-  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.35);
+   --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.4);
+   --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.35);
 }
+
 /* =====================================
    🌙 ROYAL DARK MODE OVERRIDES
 ===================================== */
 
 [data-theme="dark"] {
-  --bg-main: #0f0f0f;
-  --bg-white: #1a1a1a;
+   --bg-main: #0f0f0f;
+   --bg-white: #1a1a1a;
 
-  --text-main: #f5f5f5;
-  --text-light: #bbbbbb;
+   --text-main: #f5f5f5;
+   --text-light: #bbbbbb;
 
-  --primary: #d4af37;
-  --primary-dark: #b8962e;
-  --primary-light: #f3d77a;
+   --primary: #d4af37;
+   --primary-dark: #b8962e;
+   --primary-light: #f3d77a;
 
-  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.35);
+   --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.4);
+   --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.35);
 }
 
 /* Smooth transition only for theme colors */
 body {
-  transition: background-color 0.3s ease,
-              color 0.3s ease;
+   transition: background-color 0.3s ease,
+      color 0.3s ease;
 }

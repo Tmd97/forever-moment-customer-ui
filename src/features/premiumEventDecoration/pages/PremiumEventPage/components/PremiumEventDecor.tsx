@@ -38,17 +38,7 @@ export default function ProductCatalog() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="
-                bg-white
-                rounded-2xl
-                overflow-hidden
-                border border-[var(--primary-light)]/10
-                shadow-[var(--shadow-soft)]
-                hover:shadow-[var(--shadow-gold)]
-                transition-all duration-300
-                cursor-pointer
-                group
-              "
+              className="card cursor-pointer group flex flex-col"
             >
               {/* Image */}
               <div className="overflow-hidden">

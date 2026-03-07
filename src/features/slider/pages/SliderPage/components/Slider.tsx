@@ -139,30 +139,14 @@ shadow-[var(--shadow-soft)]
                 {slides[index].subtitle}
               </p>
 
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4 mt-6">
 
-                <button className="
-bg-[var(--primary)]
-hover:bg-[var(--primary-dark)]
-text-white
-px-6 py-3 rounded-full
-flex items-center gap-2
-shadow-[var(--shadow-gold)]
-transition-all duration-300
-">
+                <button className="btn-primary">
                   <Calendar size={18} />
                   Book Now
                 </button>
 
-                <button className="
-                  bg-white/20
-                  hover:bg-[var(--primary-light)]/20
-                  text-white
-                  px-6 py-3 rounded-full
-                  backdrop-blur-md
-                  border border-[var(--primary-light)]/40
-                  transition-all duration-300
-                ">
+                <button className="btn-secondary !text-white !border-white/40 hover:!bg-white/20 hover:!text-white hover:!border-white transition-all duration-300">
                   Explore
                 </button>
 

@@ -2,7 +2,7 @@ import { Crown, Clock, Palette, Sparkles } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 export default function QuickHighlightsPremium() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const items = [
     { icon: Crown, title: "Premium Themes" },
@@ -72,14 +72,14 @@ export default function QuickHighlightsPremium() {
 
             {/* Text */}
             <span
-              className="font-medium text-sm md:text-base"
+              className="font-semibold text-sm md:text-base tracking-wide mt-1 transition-colors duration-300 group-hover:text-[var(--primary)] text-center"
               style={{ color: "var(--text-main)" }}
             >
               {item.title}
             </span>
 
             {/* Animated Gradient Underline */}
-            <div className="gradient-underline mt-2" />
+            <div className="gradient-underline mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         ))}
       </div>
