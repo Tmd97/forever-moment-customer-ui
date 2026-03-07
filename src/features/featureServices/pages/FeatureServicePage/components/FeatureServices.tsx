@@ -1,0 +1,176 @@
+import { Link } from "react-router-dom";
+import { Star, MapPin, Heart } from "lucide-react";
+import { useState } from "react";
+
+const services = [
+  {
+    id: 1,
+    title: "Romantic Anniversary Decoration",
+    image:
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200",
+    price: 2999,
+    rating: 4.8,
+    city: "Mumbai",
+  },
+  {
+    id: 2,
+    title: "Birthday Balloon Decoration",
+    image:
+      "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=1200",
+    price: 1999,
+    rating: 4.6,
+    city: "Delhi",
+  },
+  {
+    id: 3,
+    title: "Candlelight Dinner Setup",
+    image:
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200",
+    price: 4999,
+    rating: 4.9,
+    city: "Bangalore",
+  },
+  {
+    id: 4,
+    title: "Haldi Decoration Setup",
+    image:
+      "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1200",
+    price: 5999,
+    rating: 4.7,
+    city: "Jaipur",
+  },
+  {
+    id: 5,
+    title: "Baby Shower Decoration",
+    image:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200",
+    price: 3499,
+    rating: 4.5,
+    city: "Pune",
+  },
+  {
+    id: 6,
+    title: "Wedding Room Decoration",
+    image:
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200",
+    price: 7999,
+    rating: 4.9,
+    city: "Hyderabad",
+  },
+];
+
+export default function FeaturedServices() {
+  const [liked, setLiked] = useState<number[]>([]);
+
+  const toggleLike = (id: number) => {
+    if (liked.includes(id)) {
+      setLiked(liked.filter((i) => i !== id));
+    } else {
+      setLiked([...liked, id]);
+    }
+  };
+
+  return (
+    <section className="py-[var(--section-padding-y)] bg-white">
+      <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Heading */}
+        <div className="flex justify-between items-center mb-10">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-semibold text-black mb-2">
+              Featured Services
+            </h2>
+            <p className="text-gray-600 text-sm">
+              Most popular decoration services
+            </p>
+          </div>
+
+          <Link
+            to="/services"
+            className="text-[var(--primary)] text-sm font-medium hover:text-[var(--primary-dark)]"
+          >
+            View All
+          </Link>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {services.map((service) => (
+            <Link
+              key={service.id}
+              to={`/experience/${service.id}`}
+            >
+
+              <div className="bg-white rounded-2xl border border-[var(--primary-light)]/10 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-gold)] transition-all duration-300 overflow-hidden group cursor-pointer">
+
+                {/* Image */}
+                <div className="relative h-[220px] overflow-hidden">
+
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  />
+
+                  {/* Like Button */}
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleLike(service.id);
+                    }}
+                    className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-[var(--shadow-soft)] cursor-pointer"
+                  >
+                    <Heart
+                      size={18}
+                      className={
+                        liked.includes(service.id)
+                          ? "text-[var(--primary)] fill-[var(--primary)]"
+                          : "text-gray-600"
+                      }
+                    />
+                  </div>
+
+                </div>
+
+                {/* Content */}
+                <div className="p-5">
+
+                  <h3 className="font-semibold text-black text-base mb-3 group-hover:text-[var(--primary)]">
+                    {service.title}
+                  </h3>
+
+                  <div className="flex items-center gap-1 text-gray-600 text-sm mb-3">
+                    <MapPin size={14} className="text-[var(--primary-light)]" />
+                    {service.city}
+                  </div>
+
+                  <div className="flex justify-between items-center">
+
+                    <div className="flex items-center gap-1 text-sm">
+                      <Star
+                        size={14}
+                        className="text-[var(--primary-light)] fill-[var(--primary-light)]"
+                      />
+                      {service.rating}
+                    </div>
+
+                    <div className="text-[var(--primary)] font-semibold">
+                      ₹{service.price}
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </Link>
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+  );
+}

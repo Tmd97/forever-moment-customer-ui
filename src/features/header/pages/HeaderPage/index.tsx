@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import './css/styles.scss';
 import { toggleMenu, setSearchQuery, getCategories } from '@/features/header/store/actions';
 import Header from './components/Header';
 import type { RootState } from '@/store/store';

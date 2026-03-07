@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import '../../css/styles.scss';
 import UpperHeader from './UpperHeader';
 import LowerHeader from './LowerHeader';
 

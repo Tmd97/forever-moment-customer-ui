@@ -1,12 +1,18 @@
 import * as types from './action-types';
 
-const initialState = {
+export interface SliderState {
+    slides: any[];
+    slidesLoading: boolean;
+    slidesError: string | null;
+}
+
+const initialState: SliderState = {
     slides: [],
     slidesLoading: false,
     slidesError: null,
 };
 
-export const sliderReducer = (state = initialState, action: any) => {
+export const sliderReducer = (state = initialState, action: any): SliderState => {
     switch (action.type) {
         case types.GET_SLIDES:
             return {

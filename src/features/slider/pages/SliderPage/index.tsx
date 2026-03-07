@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import './css/styles.scss';
 import { getSlides } from '@/features/slider/store/actions';
 import Slider from './components/Slider';
 import type { RootState } from '@/store/store';

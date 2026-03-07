@@ -1,6 +1,14 @@
 import * as types from './action-types';
 
-const initialState = {
+export interface HeaderState {
+    isMenuOpen: boolean;
+    searchQuery: string;
+    categories: any[];
+    categoriesLoading: boolean;
+    categoriesError: string | null;
+}
+
+const initialState: HeaderState = {
     isMenuOpen: false,
     searchQuery: '',
     categories: [],
@@ -8,7 +16,7 @@ const initialState = {
     categoriesError: null,
 };
 
-export const headerReducer = (state = initialState, action: any) => {
+export const headerReducer = (state = initialState, action: any): HeaderState => {
     switch (action.type) {
         case types.TOGGLE_MENU:
             return {

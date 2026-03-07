@@ -1,12 +1,18 @@
 import * as types from './action-types';
 
-const initialState = {
+export interface HomeState {
+    data: any | null;
+    loading: boolean;
+    error: string | null;
+}
+
+const initialState: HomeState = {
     data: null,
     loading: false,
     error: null,
 };
 
-export const homeReducer = (state = initialState, action: any) => {
+export const homeReducer = (state = initialState, action: any): HomeState => {
     switch (action.type) {
         case types.GET_HOME_DATA:
             return { ...state, loading: false };
