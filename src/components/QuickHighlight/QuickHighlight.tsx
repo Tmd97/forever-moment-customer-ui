@@ -34,7 +34,7 @@ export default function QuickHighlightsPremium() {
   return (
     <section
       style={{
-        background: "var(--bg-white)",
+        background: "white",
         padding: "36px 0",
         borderTop: "1px solid var(--border-light)",
         borderBottom: "1px solid var(--border-light)",
@@ -61,12 +61,12 @@ export default function QuickHighlightsPremium() {
                   height: "52px",
                   borderRadius: "50%",
                   background:
-                    "linear-gradient(135deg, var(--primary), var(--primary-light))",
-                  boxShadow: "var(--shadow-gold)",
+                    "linear-gradient(135deg, var(--burgundy), var(--rose))",
+                  boxShadow: "var(--shadow-burgundy)",
                 }}
                 className="flex items-center justify-center"
               >
-                <item.icon size={20} color="#1a1a1a" />
+                <item.icon size={20} color="white" />
               </div>
             </div>
 

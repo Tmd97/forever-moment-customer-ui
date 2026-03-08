@@ -8,17 +8,28 @@
    🎨 COLORS
 ================================= */
 
-$primary: goldenrod;
+$primary: #7c2d3b;
 $primary-dark: #b8962e;
-$primary-light: #f3d77a;
+$primary-light: #7c2d3b;
 
-$bg-main: #fff8e7; // Soft cream background
+// Accent palette (burgundy / rose)
+$burgundy: #7c2d3b;
+$burgundy-dark: #5a1e29;
+$rose: #d4837a;
+$rose-light: #f5e6e4;
+$cream: #fdf6ee;
+$gold: #c9a96e;
+$gold-light: #e8d5a3;
+$charcoal: #2c2420;
+$mid: #7a6a5a;
+
+$bg-main: #fdf6ee; // Warm cream background (from reference)
 $bg-white: #ffffff;
 
-$text-main: #1a1a1a;
-$text-light: #666666;
+$text-main: #2c2420;
+$text-light: #7a6a5a;
 
-$border-light: #eeeeee;
+$border-light: rgba(201, 169, 110, 0.18);
 
 
 /* ===============================
@@ -70,23 +81,34 @@ $shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.25);
 
 :root {
    --primary: #{$primary};
-   //   --section-gap: 80px;
    --primary-dark: #{$primary-dark};
    --primary-light: #{$primary-light};
+
+   // Accent palette
+   --burgundy: #{$burgundy};
+   --burgundy-dark: #{$burgundy-dark};
+   --rose: #{$rose};
+   --rose-light: #{$rose-light};
+   --cream: #{$cream};
+   --gold: #{$gold};
+   --gold-light: #{$gold-light};
+   --charcoal: #{$charcoal};
+   --mid: #{$mid};
 
    --bg-main: #{$bg-main};
    --bg-white: #{$bg-white};
    --section-padding-y: 80px;
-   --container-width: 1200px;
 
    --text-main: #{$text-main};
    --text-light: #{$text-light};
 
+   --border-light: #{$border-light};
    --radius-md: #{$radius-md};
    --radius-lg: #{$radius-lg};
 
    --shadow-soft: #{$shadow-soft};
    --shadow-gold: #{$shadow-gold};
+   --shadow-burgundy: 0 4px 16px rgba(124, 45, 59, 0.3);
 
    --container-width: #{$container-width};
 }

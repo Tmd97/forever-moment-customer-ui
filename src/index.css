@@ -1,98 +1,70 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
-/* ----------------------*******************************-------------- */
-.custom-scroll::-webkit-scrollbar {
-  display: none;
-}
+/* ─── SCROLLBAR ─── */
+.custom-scroll::-webkit-scrollbar { display: none; }
+.custom-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-.custom-scroll {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream, #fdf6ee); }
+::-webkit-scrollbar-thumb { background: var(--gold, #c9a96e); border-radius: 3px; }
 
+/* ─── GLOBAL BODY ─── */
 body {
   width: 100%;
   overflow-x: hidden;
-  /* horizontal off */
   overflow-y: auto;
-  transition: background 0.4s ease, color 0.4s ease;
-  /* vertical ON */
+  font-family: 'Jost', sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
 }
 
-* {
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-/* For .scrollbar-hide  */
-/* Hide scrollbar but allow scroll */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  /* IE & Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
+/* ─── ANIMATIONS ─── */
 @keyframes goldPulse {
-  0% { box-shadow: 0 0 0 rgba(212,175,55,0.4); }
-  50% { box-shadow: 0 0 20px rgba(212,175,55,0.6); }
-  100% { box-shadow: 0 0 0 rgba(212,175,55,0.4); }
+  0%   { box-shadow: 0 0 0 rgba(201,169,110,0.4); }
+  50%  { box-shadow: 0 0 20px rgba(201,169,110,0.6); }
+  100% { box-shadow: 0 0 0 rgba(201,169,110,0.4); }
+}
+.pulse-gold { animation: goldPulse 2.5s infinite; }
+
+@keyframes shimmerMove {
+  0%   { left: -60%; }
+  100% { left: 120%; }
 }
 
-.pulse-gold {
-  animation: goldPulse 2.5s infinite;
+@keyframes fadeUp {
+  from { transform: translateY(28px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
 }
 
-/* Subtle Gold Shimmer */
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
 .shimmer-icon::after {
   content: "";
   position: absolute;
-  top: -20%;
-  left: -60%;
-  width: 40%;
-  height: 140%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.6),
-    transparent
-  );
+  top: -20%; left: -60%;
+  width: 40%; height: 140%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
   transform: rotate(25deg);
   animation: shimmerMove 3s infinite;
 }
 
-@keyframes shimmerMove {
-  0% {
-    left: -60%;
-  }
-  100% {
-    left: 120%;
-  }
-}
-
-/* Gradient Underline */
 .gradient-underline {
-  height: 2px;
-  width: 0%;
-  background: linear-gradient(
-    to right,
-    var(--primary),
-    var(--primary-light)
-  );
+  height: 2px; width: 0%;
+  background: linear-gradient(to right, var(--burgundy), var(--gold));
   transition: width 0.4s ease;
 }
+.group:hover .gradient-underline { width: 100%; }
 
-.group:hover .gradient-underline {
-  width: 100%;
-}
-/* ---------------------------**************************------------------- */
-
+/* ─── TAILWIND THEME ─── */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -207,9 +179,11 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
-
   body {
     @apply bg-background text-foreground;
+  }
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Cormorant Garamond', serif;
   }
 }
 
@@ -217,78 +191,168 @@ body {
    👑 PRIMITIVES (Buttons, Inputs, Cards)
 ===================================================== */
 @layer components {
-  /* Buttons */
+
+  /* ── Buttons ── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-white transition-all duration-300;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    font-family: 'Jost', sans-serif;
+    background: linear-gradient(135deg, var(--burgundy), #a83a4a);
+    box-shadow: 0 4px 16px rgba(124, 45, 59, 0.3);
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+    box-shadow: 0 6px 22px rgba(124, 45, 59, 0.4);
   }
-  .btn-primary:active {
-    transform: translateY(0);
-  }
+  .btn-primary:active { transform: translateY(0); }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-[color:var(--text-main)] transition-all duration-300 backdrop-blur-md;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 backdrop-blur-md;
+    font-family: 'Jost', sans-serif;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(212, 175, 55, 0.4);
+    border: 1.5px solid rgba(201, 169, 110, 0.4);
+    color: var(--text-main);
   }
   .btn-secondary:hover {
-    background: rgba(212, 175, 55, 0.15);
-    color: var(--primary-dark);
-    border-color: var(--primary);
+    background: var(--rose-light);
+    border-color: var(--rose);
+    color: var(--burgundy);
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-medium text-white transition-all duration-300;
+    font-family: 'Jost', sans-serif;
+    background: linear-gradient(135deg, var(--gold), #b8914a);
+    box-shadow: 0 3px 12px rgba(201, 169, 110, 0.4);
+    font-size: 0.82rem;
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(201, 169, 110, 0.5);
   }
 
   .btn-icon {
     @apply flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300;
     background: var(--bg-white);
-    border: 1px solid var(--border-light);
-    color: var(--text-main);
+    border: 1.5px solid var(--border-light);
+    color: var(--mid);
   }
   .btn-icon:hover {
-    background: rgba(212, 175, 55, 0.1);
-    color: var(--primary);
+    background: var(--rose-light);
+    color: var(--burgundy);
     transform: scale(1.05);
   }
 
-  /* Inputs */
+  /* ── Inputs ── */
   .input-search {
     @apply w-full flex items-center rounded-full px-4 py-2 transition-all duration-300;
-    background: var(--bg-white);
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-soft);
+    background: white;
+    border: 1.5px solid var(--border-light);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
   }
   .input-search:focus-within {
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
-    border-color: var(--primary-light);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1);
   }
 
-  /* Cards */
+  /* ── Cards ── */
   .card {
-    @apply rounded-2xl overflow-hidden transition-all duration-300 bg-[color:var(--bg-white)];
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    box-shadow: var(--shadow-soft);
+    @apply rounded-2xl overflow-hidden transition-all duration-300;
+    background: white;
+    border: 1px solid rgba(201, 169, 110, 0.12);
+    cursor: pointer;
   }
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-gold);
-    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-7px);
+    box-shadow: 0 20px 50px rgba(124, 45, 59, 0.12);
   }
-}
 
-/* =====================================================
-   ✒️ TYPOGRAPHY
-===================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
-
-@layer base {
-  body {
-    font-family: 'Inter', sans-serif;
+  /* ── Section Headers ── */
+  .section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    font-family: 'Jost', sans-serif;
   }
-  h1, h2, h3, h4, h5, h6, .font-serif {
-    font-family: 'Playfair Display', serif;
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--charcoal);
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--burgundy);
+  }
+  .see-all {
+    font-size: 0.82rem;
+    color: var(--gold);
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: gap 0.2s;
+    font-family: 'Jost', sans-serif;
+  }
+  .see-all:hover { gap: 0.7rem; }
+
+  /* ── Location Pill ── */
+  .location-pill {
+    @apply flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200;
+    background: var(--rose-light);
+    border: 1.5px solid rgba(212, 131, 122, 0.25);
+    color: var(--burgundy);
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: 'Jost', sans-serif;
+  }
+  .location-pill:hover {
+    background: #edd8d5;
+  }
+
+  /* ── Card Badge ── */
+  .card-badge {
+    @apply absolute top-3.5 left-3.5 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    color: var(--burgundy);
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.1em;
+  }
+  .card-badge.pop {
+    background: var(--burgundy);
+    color: white;
+  }
+
+  /* ── Stats Bar ── */
+  .stats-bar {
+    @apply flex justify-center;
+    background: var(--burgundy);
+  }
+  .stat-item {
+    @apply flex-1 text-center;
+    max-width: 220px;
+    padding: 1.4rem 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    font-family: 'Jost', sans-serif;
   }
 }

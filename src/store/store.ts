@@ -5,10 +5,9 @@ import { sliderReducer } from '@/features/slider/store/reducer';
 import { balloonDecorReducer } from '@/features/balloonDecor/store/reducer';
 import { beforeAfterSlideReducer } from '@/features/beforeAfterSlide/store/reducer';
 import { experiencesReducer } from '@/features/experiences/store/reducer';
-import { featureServicesReducer } from '@/features/featureServices/store/reducer';
 import { packagesReducer } from '@/features/packages/store/reducer';
-import { premiumEventDecorationReducer } from '@/features/premiumEventDecoration/store/reducer';
 import { whyChooseUsReducer } from '@/features/whyChooseUs/store/reducer';
+import testimonialsReducer from '@/features/testimonials/store/reducer';
 import { configReducer } from '@/store/config/reducer';
 
 export const store = configureStore({
@@ -19,10 +18,9 @@ export const store = configureStore({
     balloonDecor: balloonDecorReducer,
     beforeAfterSlide: beforeAfterSlideReducer,
     experiences: experiencesReducer,
-    featureServices: featureServicesReducer,
     packages: packagesReducer,
-    premiumEventDecoration: premiumEventDecorationReducer,
     whyChooseUs: whyChooseUsReducer,
+    testimonials: testimonialsReducer,
     config: configReducer as any,
   },
 });

@@ -1,9 +1,12 @@
 import { connect } from 'react-redux';
-import './css/styles.scss';
+import '../css/styles.scss';
 import { getSlides } from '@/features/slider/store/actions';
-// import Slider from './components/Slider';
 import type { RootState } from '@/store/store';
 import WhyChooseUs from './components/WhyChooseUs';
+
+const WhyChooseUsContainer = (props: any) => {
+    return <WhyChooseUs {...props} />;
+};
 
 const mapStateToProps = (state: RootState) => ({
     slides: state.slider?.slides ?? [],
@@ -14,4 +17,4 @@ const mapDispatchToProps = {
     getSlides,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WhyChooseUs);
+export default connect(mapStateToProps, mapDispatchToProps)(WhyChooseUsContainer);
