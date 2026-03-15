@@ -9,7 +9,7 @@ import WhyUs from "./WhyUs";
 import FAQ from "./FAQ";
 import CancellationPolicy from "./CancellationPolicy";
 import RelatedExperiences from "./RelatedExperiences";
-import GiftSlider from "@/components/GiftSlider/GiftSlider";
+import GiftSlider from "@/features/slider/pages/Slider/components/GiftSlider";
 
 export interface ExperienceViewProps {
   experience: any;
@@ -18,11 +18,11 @@ export interface ExperienceViewProps {
   getExperienceDetail: (id: string) => void;
 }
 
-export default function ExperienceDetails({ 
-  experience, 
-  loading, 
+export default function ExperienceDetails({
+  experience,
+  loading,
   error,
-  getExperienceDetail 
+  getExperienceDetail
 }: ExperienceViewProps) {
   const { id } = useParams<{ id: string }>();
 
@@ -120,8 +120,8 @@ export default function ExperienceDetails({
             <button
               onClick={() => setActiveTab("inclusion")}
               className={`pb-3 font-medium whitespace-nowrap ${activeTab === "inclusion"
-                  ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
-                  : "text-gray-500"
+                ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
+                : "text-gray-500"
                 }`}
             >
               Inclusions
@@ -131,8 +131,8 @@ export default function ExperienceDetails({
           <button
             onClick={() => setActiveTab("reviews")}
             className={`pb-3 font-medium whitespace-nowrap ${activeTab === "reviews"
-                ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
-                : "text-gray-500"
+              ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
+              : "text-gray-500"
               }`}
           >
             Reviews
@@ -142,8 +142,8 @@ export default function ExperienceDetails({
             <button
               onClick={() => setActiveTab("faq")}
               className={`pb-3 font-medium whitespace-nowrap ${activeTab === "faq"
-                  ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
-                  : "text-gray-500"
+                ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
+                : "text-gray-500"
                 }`}
             >
               FAQ
@@ -153,8 +153,8 @@ export default function ExperienceDetails({
           <button
             onClick={() => setActiveTab("cancellation")}
             className={`pb-3 font-medium whitespace-nowrap ${activeTab === "cancellation"
-                ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
-                : "text-gray-500"
+              ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
+              : "text-gray-500"
               }`}
           >
             Cancellation Policy
@@ -163,8 +163,8 @@ export default function ExperienceDetails({
           <button
             onClick={() => setActiveTab("WhyUs")}
             className={`pb-3 font-medium whitespace-nowrap ${activeTab === "WhyUs"
-                ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
-                : "text-gray-500"
+              ? "text-[var(--primary)] border-b-2 border-[var(--primary)]"
+              : "text-gray-500"
               }`}
           >
             WhyUs

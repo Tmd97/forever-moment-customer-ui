@@ -1,27 +1,33 @@
 import { useState } from "react";
 
-export default function FAQ(){
+interface FAQItem {
+  q: string;
+  a: string;
+}
 
-  const [open,setOpen] = useState<number | null>(null);
+interface FAQProps {
+  items?: FAQItem[];
+}
 
-  const faqs = [
+export default function FAQ({ items }: FAQProps) {
+  const [open, setOpen] = useState<number | null>(null);
 
+  const defaultFaqs = [
     {
-      q:"When will the decorator arrive?",
-      a:"Our team arrives 2 hours before your selected time slot."
+      q: "When will the decorator arrive?",
+      a: "Our team arrives 2 hours before your selected time slot.",
     },
-
     {
-      q:"Can I customize the decoration?",
-      a:"Yes, you can contact our support team for customization."
+      q: "Can I customize the decoration?",
+      a: "Yes, you can contact our support team for customization.",
     },
-
     {
-      q:"Is cake included in this package?",
-      a:"Cake is not included but you can add it from add-ons."
-    }
-
+      q: "Is cake included in this package?",
+      a: "Cake is not included but you can add it from add-ons.",
+    },
   ];
+
+  const faqs = items && items.length > 0 ? items : defaultFaqs;
 
   const toggle = (i:number)=>{
     setOpen(open===i ? null : i)

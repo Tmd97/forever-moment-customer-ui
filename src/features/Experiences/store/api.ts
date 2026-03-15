@@ -1,5 +1,5 @@
 // Base API template
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_URL || '/api/platform';
 
 export const fetchData = async () => {
     const response = await fetch(`${API_BASE}/public/experiences`);

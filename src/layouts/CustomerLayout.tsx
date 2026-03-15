@@ -19,7 +19,7 @@ const CustomerLayout = () => {
       {/* CONTENT */}
       <main className="relative z-0">
         <Outlet />
-        <FloatingBookingCTA/>
+        <FloatingBookingCTA />
       </main>
       <Footer />
     </div>
