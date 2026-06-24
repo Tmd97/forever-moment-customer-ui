@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import CategoryListCard from "@/components/common/CategoryListCard";
+import FadeIn from "@/components/animations/FadeIn";
 
 interface Category {
   id: number;
@@ -23,21 +24,30 @@ export default function CategoryListView({ categories }: CategoryListViewProps) 
   if (activeCategories.length === 0) return null;
 
   return (
-    <section className="py-16" style={{ background: "var(--cream)" }}>
-      <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="section-padding bg-white">
+      <div className="max-w-[1380px] mx-auto px-6">
 
         {/* Section Header */}
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <div className="section-eyebrow">Every Occasion</div>
-            <h2 className="section-title">
-              Browse by <em>Category</em>
-            </h2>
+        <FadeIn>
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <p style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.7rem] text-[#9E8A6A] tracking-[0.25em] uppercase mb-2">
+                Every Occasion
+              </p>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', serif" }} className="text-[2rem] md:text-[2.6rem] text-[#1A1208] font-semibold leading-tight">
+                Browse by <em>Category</em>
+              </h2>
+            </div>
+            <Link 
+              to="/categories" 
+              style={{ fontFamily: "'Jost', sans-serif" }} 
+              className="text-[#C9A84C] text-[0.85rem] font-medium uppercase tracking-[0.1em] hover:text-[#1A1208] transition-colors flex items-center gap-2 group"
+            >
+              All Categories 
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
           </div>
-          <Link to="/categories" className="see-all">
-            All Categories →
-          </Link>
-        </div>
+        </FadeIn>
 
         {/* Category Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">

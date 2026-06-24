@@ -44,10 +44,10 @@ export default function CategoryListCard({ category, imageIndex }: CategoryListC
 
       {/* Overlay */}
       <div
-        className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-75"
+        className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-85"
         style={{
           background:
-            "linear-gradient(to top, rgba(90,30,41,0.85), rgba(90,30,41,0.2))",
+            "linear-gradient(to top, rgba(26,18,8,0.9), rgba(26,18,8,0.2))",
         }}
       />
 

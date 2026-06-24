@@ -10,157 +10,163 @@ import {
 
 export default function Footer() {
 
-  const categories = [
-    "Anniversary",
-    "Birthdays",
-    "Decorations",
-    "Candlelight Dinner",
-    "Corporate Events",
-    "Festivals",
-  ];
-
   const quickLinks = [
     "About Us",
-    "Contact",
-    "Privacy Policy",
-    "Terms & Conditions",
+    "Our Services",
+    "Vendor Network",
+    "Contact Us",
+    "FAQs",
+  ];
+
+  const categories = [
+    "Wedding Decor",
+    "Birthday Bash",
+    "Corporate Events",
+    "Engagements",
+    "Luxury Gifts",
   ];
 
   return (
+    <footer className="bg-[#1A1208] text-white pt-16 pb-8">
+      <div className="max-w-[1380px] mx-auto px-6">
 
-    <footer className="bg-orange-50 border-t">
+        {/* TOP GRID — 4 columns desktop, 1 column mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
 
-      <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-8">
+          {/* Column 1 — Brand */}
+          <div>
+            <Link to="/" className="flex flex-col leading-tight mb-4">
+              <span style={{ fontFamily: "'Cormorant Garamond', serif" }} className="text-[1.4rem] text-[#C9A84C] font-bold tracking-[0.2em]">
+                FOREVER
+              </span>
+              <span style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.58rem] text-white tracking-[0.45em]">
+                MOMENT
+              </span>
+            </Link>
+            <p style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.82rem] text-white/60 leading-relaxed mb-5">
+              Crafting luxury moments across India with premium event decorations, curated gifts, and elite vendor partnerships.
+            </p>
 
-        {/* Logo + Description */}
-        <div>
+            {/* Social Icons */}
+            <div className="flex gap-3">
+              <a href="#" className="w-9 h-9 flex items-center justify-center border border-white/15 hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">
+                <Instagram size={15} />
+              </a>
+              <a href="#" className="w-9 h-9 flex items-center justify-center border border-white/15 hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">
+                <Facebook size={15} />
+              </a>
+              <a href="#" className="w-9 h-9 flex items-center justify-center border border-white/15 hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">
+                <Youtube size={15} />
+              </a>
+            </div>
+          </div>
 
-          <h2 className="
-            text-2xl font-bold
-            bg-gradient-to-r from-orange-500 to-pink-500
-            bg-clip-text text-transparent
-            mb-3
-          ">
-            ForeverMoment
-          </h2>
+          {/* Column 2 — Quick Links */}
+          <div>
+            <h4 style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.75rem] text-[#C9A84C] tracking-[0.2em] uppercase mb-5">
+              Quick Links
+            </h4>
+            <ul className="space-y-3">
+              {quickLinks.map((item) => (
+                <li key={item}>
+                  <Link
+                    to="/"
+                    style={{ fontFamily: "'Jost', sans-serif" }}
+                    className="text-[0.82rem] text-white/60 hover:text-[#C9A84C] transition-colors"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <p className="text-gray-600 text-sm">
+          {/* Column 3 — Categories */}
+          <div>
+            <h4 style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.75rem] text-[#C9A84C] tracking-[0.2em] uppercase mb-5">
+              Categories
+            </h4>
+            <ul className="space-y-3">
+              {categories.map((item) => (
+                <li key={item}>
+                  <Link
+                    to="/"
+                    style={{ fontFamily: "'Jost', sans-serif" }}
+                    className="text-[0.82rem] text-white/60 hover:text-[#C9A84C] transition-colors"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            We provide premium decoration and event services
-            for birthdays, anniversaries, weddings and special occasions.
+          {/* Column 4 — Contact + Newsletter */}
+          <div>
+            <h4 style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.75rem] text-[#C9A84C] tracking-[0.2em] uppercase mb-5">
+              Get In Touch
+            </h4>
 
+            <div className="space-y-3 mb-6">
+              <div className="flex items-start gap-3">
+                <MapPin size={15} color="#C9A84C" className="mt-0.5 shrink-0" />
+                <span style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.82rem] text-white/60">
+                  Mumbai, India
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone size={15} color="#C9A84C" />
+                <span style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.82rem] text-white/60">
+                  +91 65223651230
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail size={15} color="#C9A84C" />
+                <span style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.82rem] text-white/60">
+                  support@forevermoment.com
+                </span>
+              </div>
+            </div>
+
+            {/* Newsletter */}
+            <div className="flex">
+              <input
+                type="email"
+                placeholder="Email address"
+                style={{ fontFamily: "'Jost', sans-serif" }}
+                className="flex-1 bg-white/5 border border-white/15 px-4 py-2.5 text-[0.8rem] text-white placeholder-white/40 outline-none focus:border-[#C9A84C]"
+              />
+              <button
+                style={{ fontFamily: "'Jost', sans-serif" }}
+                className="bg-[#C9A84C] text-[#1A1208] px-5 text-[0.75rem] tracking-[0.1em] uppercase font-semibold hover:bg-[#E8C97A] transition-colors"
+              >
+                Join
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        {/* BOTTOM BAR */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6">
+          <p style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.75rem] text-white/40">
+            © 2026 Forever Moment. All rights reserved.
           </p>
-
-          {/* Social */}
-          <div className="flex gap-4 mt-4">
-
-            <Instagram className="cursor-pointer text-orange-600 hover:scale-110 transition" />
-
-            <Facebook className="cursor-pointer text-orange-600 hover:scale-110 transition" />
-
-            <Youtube className="cursor-pointer text-orange-600 hover:scale-110 transition" />
-
-          </div>
-
-        </div>
-
-
-
-        {/* Categories */}
-        <div>
-
-          <h3 className="font-semibold mb-3">Categories</h3>
-
-          <div className="space-y-2">
-
-            {categories.map((cat) => (
-
+          <div className="flex gap-6">
+            {['Privacy Policy', 'Terms & Conditions', 'Cancellation Policy'].map((item) => (
               <Link
-                key={cat}
+                key={item}
                 to="/"
-                className="block text-gray-600 hover:text-orange-600 text-sm"
+                style={{ fontFamily: "'Jost', sans-serif" }}
+                className="text-[0.75rem] text-white/40 hover:text-[#C9A84C] transition-colors"
               >
-                {cat}
+                {item}
               </Link>
-
             ))}
-
           </div>
-
-        </div>
-
-
-
-        {/* Quick Links */}
-        <div>
-
-          <h3 className="font-semibold mb-3">Quick Links</h3>
-
-          <div className="space-y-2">
-
-            {quickLinks.map((link) => (
-
-              <Link
-                key={link}
-                to="/"
-                className="block text-gray-600 hover:text-orange-600 text-sm"
-              >
-                {link}
-              </Link>
-
-            ))}
-
-          </div>
-
-        </div>
-
-
-
-        {/* Contact */}
-        <div>
-
-          <h3 className="font-semibold mb-3">Contact</h3>
-
-          <div className="space-y-3 text-sm text-gray-600">
-
-            <div className="flex gap-2 items-center">
-              <Phone size={16} className="text-orange-600" />
-              +91 65223651230
-            </div>
-
-            <div className="flex gap-2 items-center">
-              <Mail size={16} className="text-orange-600" />
-              support@forevermoment.com
-            </div>
-
-            <div className="flex gap-2 items-center">
-              <MapPin size={16} className="text-orange-600" />
-              Mumbai, India
-            </div>
-
-          </div>
-
         </div>
 
       </div>
-
-
-
-      {/* Bottom */}
-      <div className="
-        border-t
-        text-center
-        py-4
-        text-sm
-        text-gray-500
-      ">
-
-        © 2026 ForeverMoment. All rights reserved.
-
-      </div>
-
     </footer>
-
   );
-
 }

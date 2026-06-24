@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ExperienceCard from "@/components/common/ExperienceCard";
+import FadeIn from "@/components/animations/FadeIn";
+import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 
 export interface FeaturedExperienceProps {
   experiences?: any[];
@@ -34,8 +36,8 @@ export default function FeaturedExperienceView({
 
   if (loading) {
     return (
-      <section className="py-16" style={{ background: "var(--cream)" }}>
-        <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8 text-center text-[var(--mid)]">
+      <section className="section-padding bg-[#FDFAF4]">
+        <div className="max-w-[1380px] mx-auto px-6 text-center text-[#9E8A6A]">
           Loading experiences...
         </div>
       </section>
@@ -48,26 +50,35 @@ export default function FeaturedExperienceView({
   const showViewAll = limit !== undefined;
 
   return (
-    <section className="py-16" style={{ background: "var(--cream)" }}>
-      <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="section-padding bg-[#FDFAF4]">
+      <div className="max-w-[1380px] mx-auto px-6">
 
         {/* Section Header */}
-        <div className="flex items-center justify-between mb-10">
-          <div>
-            <div className="section-eyebrow">Handpicked For You</div>
-            <h2 className="section-title">
-              Most <em>Loved</em> Experiences
-            </h2>
+        <FadeIn>
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <p style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.7rem] text-[#9E8A6A] tracking-[0.25em] uppercase mb-2">
+                Handpicked For You
+              </p>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', serif" }} className="text-[2rem] md:text-[2.6rem] text-[#1A1208] font-semibold leading-tight">
+                Most <em>Loved</em> Experiences
+              </h2>
+            </div>
+            {showViewAll && (
+              <Link 
+                to="/featured-experiences" 
+                style={{ fontFamily: "'Jost', sans-serif" }} 
+                className="text-[#C9A84C] text-[0.85rem] font-medium uppercase tracking-[0.1em] hover:text-[#1A1208] transition-colors flex items-center gap-2 group"
+              >
+                View All 
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            )}
           </div>
-          {showViewAll && (
-            <Link to="/featured-experiences" className="see-all py-2 px-4 bg-[var(--primary-light)]/10 rounded-full border border-[var(--gold)]/20 shadow-sm">
-              View All →
-            </Link>
-          )}
-        </div>
+        </FadeIn>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {finalExperiences.map((service, idx) => {
             const images = [
               "https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80",
@@ -86,21 +97,22 @@ export default function FeaturedExperienceView({
             const id = service.id || idx;
 
             return (
-              <ExperienceCard
-                key={id}
-                id={id}
-                image={image}
-                title={title}
-                category={category}
-                city={city}
-                price={price}
-                showBadge={idx === 0}
-                isLiked={liked.includes(Number(id))}
-                onToggleLike={toggleLike}
-              />
+              <StaggerItem key={id}>
+                <ExperienceCard
+                  id={id}
+                  image={image}
+                  title={title}
+                  category={category}
+                  city={city}
+                  price={price}
+                  showBadge={idx === 0}
+                  isLiked={liked.includes(Number(id))}
+                  onToggleLike={toggleLike}
+                />
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

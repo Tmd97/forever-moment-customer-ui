@@ -1,4 +1,4 @@
-import Slider from "@/features/slider/pages/Slider";
+import Hero from "@/components/home/Hero";
 import WhyChooseUs from "@/features/whyChooseUs/pages/WhyChooseUs";
 import FeaturedExperience from "@/features/experiences/pages/FeaturedExperience";
 import { useEffect } from "react";
@@ -6,6 +6,30 @@ import CategoryList from "@/features/category/pages/CategoryList";
 import Testimonials from "@/features/testimonials/pages/Testimonials";
 import StatsBar from "@/components/StatsBar/StatsBar";
 import FeaturedBanner from "@/components/FeaturedBanner/FeaturedBanner";
+
+// New sections ported from event-decoration-main
+import QuickCategories from "@/components/home/QuickCategories";
+import TrustBar from "@/components/home/TrustBar";
+import Occasions from "@/components/home/Occasions";
+import PromoBanners from "@/components/home/PromoBanners";
+import PlanningSection from "@/components/home/PlanningSection";
+import FAQ from "@/components/home/FAQ";
+import Gallery from "@/components/home/Gallery";
+import BlogSection from "@/components/home/BlogSection";
+import CtaBanner from "@/components/home/CtaBanner";
+
+// Missing sections ported from event-decoration-main
+import DecorSliderSection from "@/components/home/DecorSliderSection";
+import CategorySlider from "@/components/home/CategorySlider";
+import ComboDeals from "@/components/home/ComboDeals";
+import FlowerPicker from "@/components/home/FlowerPicker";
+import PersonaliseSection from "@/components/home/PersonaliseSection";
+import TrendingPackages from "@/components/home/TrendingPackages";
+import RecentlyViewed from "@/components/home/RecentlyViewed";
+import AddonsSlider from "@/components/home/AddonsSlider";
+
+// Static Data
+import { decorSliders } from "@/data/decorSliders";
 
 interface HomeProps {
   loading: boolean;
@@ -21,8 +45,6 @@ const Home = ({ loading, error, getFeaturedExperiences, getLocations }: HomeProp
     getLocations();
   }, []);
 
-  // Only show full page loader if we have NO data yet for anything
-  // Otherwise let components show their own loading/skeletons
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--cream)" }}>
@@ -41,16 +63,50 @@ const Home = ({ loading, error, getFeaturedExperiences, getLocations }: HomeProp
 
   return (
     <div>
-      <Slider />
+      <Hero />
+      <QuickCategories />
       <StatsBar />
-
+      <TrustBar />
+      <Occasions />
+      
       <FeaturedExperience limit={3} />
-      <FeaturedBanner />
+      <PromoBanners />
 
+      {/* New Decor Sliders block 1 */}
+      <DecorSliderSection slider={decorSliders[0]} bg="white" />
+      <DecorSliderSection slider={decorSliders[1]} bg="cream" />
+      <DecorSliderSection slider={decorSliders[2]} bg="white" />
+      <DecorSliderSection slider={decorSliders[3]} bg="cream" />
+
+      {/* Category Slider replaces CategoryList conceptually but keeping both per user request to not break things */}
+      <CategorySlider />
       <CategoryList />
 
+      <ComboDeals />
+
+      {/* New Decor Sliders block 2 */}
+      <DecorSliderSection slider={decorSliders[4]} bg="white" />
+      <DecorSliderSection slider={decorSliders[5]} bg="cream" />
+      <DecorSliderSection slider={decorSliders[6]} bg="white" />
+      <DecorSliderSection slider={decorSliders[7]} bg="cream" />
+
+      {/* FeaturedBanner from forever-moment originally */}
+      <FeaturedBanner />
+
+      <FlowerPicker />
+      <PersonaliseSection />
+      <TrendingPackages />
+      
+      <PlanningSection />
       <WhyChooseUs />
       <Testimonials />
+      <FAQ />
+      
+      <RecentlyViewed />
+      <Gallery />
+      <AddonsSlider />
+      <BlogSection />
+      <CtaBanner />
     </div>
   );
 };

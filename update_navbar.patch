@@ -1,0 +1,752 @@
+--- src/components/navbar/Navbar.tsx
++++ src/components/navbar/Navbar.tsx
+@@ -1,9 +1,13 @@
+ import { useState, useRef, useEffect } from "react";
+ import { Link, useNavigate } from "react-router-dom";
+ import MegaMenu from "./MegaMenu";
++import { useAppDispatch, useAppSelector } from "@/store/hooks";
++import { getCategories } from "@/features/header/store/actions";
++import { getLocations, setSelectedLocation } from "@/features/home/store/actions";
++import { CUSTOMER_CONFIG } from "@/config/constants";
+ import {
+   FiSearch,
+   FiHelpCircle,
+   FiUser,
+   FiShoppingBag,
+   FiMenu,
+@@ -25,417 +29,18 @@
+ // ============================================
+ // NAV CATEGORIES — FnP style horizontal bar
+ // har category ka icon + label + subcategories
+ // ============================================
+-const navLinks = [
+-  {
+-    label: "Experiences",
+-    emoji: "✨",
+-    to: "/experiences",
+-    categories: [
+-      {
+-        title: "Romantic",
+-        items: [
+-          "Candlelight Dinner",
+-          "Rooftop Dinner",
+-          "Private Beach Dinner",
+-          "Anniversary Special",
+-        ],
+-      },
+-      {
+-        title: "Surprises",
+-        items: [
+-          "Room Decoration",
+-          "Balloon Surprise",
+-          "Photo Wall Setup",
+-          "Cake Surprise",
+-        ],
+-      },
+-      {
+-        title: "Adventure",
+-        items: [
+-          "City Exploration",
+-          "Hot Air Balloon",
+-          "Trekking Date",
+-          "Bike Ride",
+-        ],
+-      },
+-      {
+-        title: "Wellness",
+-        items: [
+-          "Couple Spa",
+-          "Solo Wellness Day",
+-          "Yoga Retreat",
+-          "Meditation",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Father's Day",
+-    emoji: "👨",
+-    to: "/services?category=Birthday",
+-    categories: [
+-      {
+-        title: "Gifts",
+-        items: [
+-          "Personalized Gifts",
+-          "Grooming Kits",
+-          "Tech Gadgets",
+-          "Books & More",
+-          "Luxury Hampers",
+-        ],
+-      },
+-      {
+-        title: "Sweets",
+-        items: [
+-          "Chocolates",
+-          "Dry Fruits Box",
+-          "Premium Mithai",
+-          "Sugar Free",
+-          "International",
+-        ],
+-      },
+-      {
+-        title: "Experiences",
+-        items: [
+-          "Spa Vouchers",
+-          "Dinner Date",
+-          "Adventure",
+-          "Golf Session",
+-          "Movie Night",
+-        ],
+-      },
+-      {
+-        title: "Decoration",
+-        items: [
+-          "Surprise Setup",
+-          "Balloon Decor",
+-          "Photo Wall",
+-          "Banner & Props",
+-          "Cake Delivery",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Birthday",
+-    emoji: "🎂",
+-    to: "/services?category=Birthday",
+-    categories: [
+-      {
+-        title: "Decoration",
+-        items: [
+-          "Balloon Wonderland",
+-          "Floral Setup",
+-          "Neon Signs",
+-          "Backdrop Design",
+-          "Table Decor",
+-        ],
+-      },
+-      {
+-        title: "Cakes",
+-        items: [
+-          "Custom Cakes",
+-          "Designer Cakes",
+-          "Pinata Cakes",
+-          "Jar Cakes",
+-          "Cupcakes",
+-        ],
+-      },
+-      {
+-        title: "Gifts",
+-        items: [
+-          "Personalized Frames",
+-          "Gift Hampers",
+-          "Soft Toys",
+-          "Candles Set",
+-          "Chocolates",
+-        ],
+-      },
+-      {
+-        title: "Entertainment",
+-        items: [
+-          "Magician",
+-          "Photo Booth",
+-          "DJ Services",
+-          "Clown Show",
+-          "Gaming Zone",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Occasions",
+-    emoji: "✨",
+-    to: "/services",
+-    categories: [
+-      {
+-        title: "Weddings",
+-        items: [
+-          "Mandap Setup",
+-          "Stage Decoration",
+-          "Floral Arch",
+-          "Table Setup",
+-          "Entrance Decor",
+-        ],
+-      },
+-      {
+-        title: "Engagement",
+-        items: [
+-          "Ring Ceremony",
+-          "Floral Backdrop",
+-          "Couple Seating",
+-          "Proposal Setup",
+-          "Photo Corner",
+-        ],
+-      },
+-      {
+-        title: "Baby Shower",
+-        items: [
+-          "Theme Setup",
+-          "Balloon Decor",
+-          "Photo Wall",
+-          "Welcome Baby",
+-          "Gender Reveal",
+-        ],
+-      },
+-      {
+-        title: "House Warming",
+-        items: [
+-          "Floral Decor",
+-          "Welcome Gate",
+-          "Pooja Setup",
+-          "Table Arrangement",
+-          "Balloon Decor",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Anniversary",
+-    emoji: "💍",
+-    to: "/services?category=Wedding",
+-    categories: [
+-      {
+-        title: "Decoration",
+-        items: [
+-          "Romantic Setup",
+-          "Candle Decor",
+-          "Rose Petal Path",
+-          "Balloon Arch",
+-          "Photo Wall",
+-        ],
+-      },
+-      {
+-        title: "Gifts",
+-        items: [
+-          "Couple Frames",
+-          "Memory Book",
+-          "Jewelry Box",
+-          "Hamper",
+-          "Personalized Gifts",
+-        ],
+-      },
+-      {
+-        title: "Experiences",
+-        items: [
+-          "Candle Dinner",
+-          "Spa Package",
+-          "Staycation",
+-          "Sunset Cruise",
+-          "Couple Shoot",
+-        ],
+-      },
+-      {
+-        title: "Cakes",
+-        items: [
+-          "Couple Cake",
+-          "Photo Cake",
+-          "Heart Shape",
+-          "Tier Cake",
+-          "Fondant Design",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Flowers",
+-    emoji: "🌸",
+-    to: "/shop?category=Flowers",
+-    categories: [
+-      {
+-        title: "Bouquets",
+-        items: [
+-          "Rose Bouquet",
+-          "Mixed Flowers",
+-          "Lily Bouquet",
+-          "Orchids",
+-          "Sunflowers",
+-        ],
+-      },
+-      {
+-        title: "Arrangements",
+-        items: [
+-          "Basket Arrangement",
+-          "Vase Flowers",
+-          "Box Flowers",
+-          "Flower Crown",
+-          "Table Centerpiece",
+-        ],
+-      },
+-      {
+-        title: "Exotic",
+-        items: [
+-          "Imported Roses",
+-          "Dutch Tulips",
+-          "Lavender",
+-          "Bird of Paradise",
+-          "Anthuriums",
+-        ],
+-      },
+-      {
+-        title: "By Color",
+-        items: [
+-          "Red Flowers",
+-          "Pink Flowers",
+-          "White Flowers",
+-          "Yellow Flowers",
+-          "Purple Flowers",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Cakes",
+-    emoji: "🎂",
+-    to: "/shop?category=Cakes",
+-    categories: [
+-      {
+-        title: "By Type",
+-        items: [
+-          "Birthday Cakes",
+-          "Wedding Cakes",
+-          "Photo Cakes",
+-          "Designer Cakes",
+-          "Pinata Cake",
+-        ],
+-      },
+-      {
+-        title: "By Flavor",
+-        items: [
+-          "Chocolate",
+-          "Vanilla",
+-          "Red Velvet",
+-          "Butterscotch",
+-          "Black Forest",
+-        ],
+-      },
+-      {
+-        title: "Special",
+-        items: ["Sugar Free", "Eggless", "Vegan", "Gluten Free", "Keto Cake"],
+-      },
+-      {
+-        title: "Mini Treats",
+-        items: [
+-          "Cupcakes",
+-          "Jar Cakes",
+-          "Cake Pops",
+-          "Brownies Box",
+-          "Pastries",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Personalised",
+-    emoji: "🎨",
+-    to: "/shop?category=Personalised",
+-    categories: [
+-      {
+-        title: "Photo Gifts",
+-        items: [
+-          "Photo Frames",
+-          "Photo Books",
+-          "Canvas Print",
+-          "Photo Mug",
+-          "Cushion Print",
+-        ],
+-      },
+-      {
+-        title: "Engraved",
+-        items: [
+-          "Name Necklace",
+-          "Engraved Watch",
+-          "Key Chain",
+-          "Wooden Plaque",
+-          "Crystal Award",
+-        ],
+-      },
+-      {
+-        title: "Custom Prints",
+-        items: [
+-          "T-Shirt Print",
+-          "Hoodie Design",
+-          "Phone Case",
+-          "Tote Bag",
+-          "Cap Print",
+-        ],
+-      },
+-      {
+-        title: "Stationery",
+-        items: [
+-          "Diary & Journal",
+-          "Pen Set",
+-          "Greeting Cards",
+-          "Gift Tags",
+-          "Bookmark",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Plants",
+-    emoji: "🌿",
+-    to: "/shop?category=Plants",
+-    categories: [
+-      {
+-        title: "Indoor",
+-        items: [
+-          "Money Plant",
+-          "Peace Lily",
+-          "Snake Plant",
+-          "Succulents",
+-          "Bamboo",
+-        ],
+-      },
+-      {
+-        title: "Outdoor",
+-        items: ["Rose Plant", "Jasmine", "Hibiscus", "Tulsi", "Bougainvillea"],
+-      },
+-      {
+-        title: "Gift Plants",
+-        items: [
+-          "Lucky Bamboo",
+-          "Jade Plant",
+-          "Air Purifier Set",
+-          "Herb Garden",
+-          "Bonsai",
+-        ],
+-      },
+-      {
+-        title: "Planters",
+-        items: [
+-          "Ceramic Pots",
+-          "Terracotta",
+-          "Hanging Planters",
+-          "Grow Bags",
+-          "Metal Planters",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Balloon n Services",
+-    emoji: "🎈",
+-    to: "/services?category=Balloon",
+-    categories: [
+-      {
+-        title: "Balloon Decor",
+-        items: [
+-          "Balloon Arch",
+-          "Balloon Bouquet",
+-          "Foil Balloons",
+-          "Number Balloons",
+-          "LED Balloons",
+-        ],
+-      },
+-      {
+-        title: "Event Services",
+-        items: [
+-          "Event Planning",
+-          "On-Site Setup",
+-          "Photography",
+-          "Videography",
+-          "Catering",
+-        ],
+-      },
+-      {
+-        title: "Themes",
+-        items: [
+-          "Kids Theme",
+-          "Unicorn Theme",
+-          "Superhero",
+-          "Princess Theme",
+-          "Space Theme",
+-        ],
+-      },
+-      {
+-        title: "Add-ons",
+-        items: [
+-          "Fog Machine",
+-          "Neon Signs",
+-          "Fairy Lights",
+-          "Confetti Cannon",
+-          "Smoke Effects",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Chocolates",
+-    emoji: "🍫",
+-    to: "/shop?category=Chocolates",
+-    categories: [
+-      {
+-        title: "Premium",
+-        items: [
+-          "Ferrero Rocher",
+-          "Lindt Collection",
+-          "Belgian Chocolate",
+-          "Godiva",
+-          "Toblerone",
+-        ],
+-      },
+-      {
+-        title: "Indian Brands",
+-        items: [
+-          "Cadbury Hamper",
+-          "Amul Special",
+-          "Morde Collection",
+-          "House of Chocolates",
+-          "Mason & Co",
+-        ],
+-      },
+-      {
+-        title: "Customized",
+-        items: [
+-          "Photo Chocolate",
+-          "Name Chocolate",
+-          "Logo Chocolate",
+-          "Message Bar",
+-          "Occasion Box",
+-        ],
+-      },
+-      {
+-        title: "Sugar Free",
+-        items: [
+-          "Dark Chocolate",
+-          "Stevia Sweets",
+-          "Diabetic Friendly",
+-          "Low Calorie",
+-          "Vegan",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "LUXE",
+-    emoji: "👑",
+-    to: "/services?category=Luxury",
+-    categories: [
+-      {
+-        title: "Premium Setups",
+-        items: [
+-          "Royal Mandap",
+-          "Luxury Stage",
+-          "Gold Theme",
+-          "Crystal Decor",
+-          "Premium Floral",
+-        ],
+-      },
+-      {
+-        title: "Exclusive Gifts",
+-        items: [
+-          "Luxury Hamper",
+-          "Premium Watch",
+-          "Designer Bag",
+-          "Perfume Set",
+-          "Jewellery Box",
+-        ],
+-      },
+-      {
+-        title: "Experiences",
+-        items: [
+-          "Private Yacht",
+-          "Helicopter Tour",
+-          "Private Chef",
+-          "Wine Tasting",
+-          "Luxury Spa",
+-        ],
+-      },
+-      {
+-        title: "Concierge",
+-        items: [
+-          "Personal Stylist",
+-          "Event Curator",
+-          "Floral Artist",
+-          "Luxury Transport",
+-          "VIP Planning",
+-        ],
+-      },
+-    ],
+-  },
+-  {
+-    label: "Hampers",
+-    emoji: "🧺",
+-    to: "/shop?category=Hampers",
+-    categories: [
+-      {
+-        title: "Gift Hampers",
+-        items: [
+-          "Luxury Hamper",
+-          "Fruit Basket",
+-          "Dry Fruit Box",
+-          "Chocolate Box",
+-          "Spa Hamper",
+-        ],
+-      },
+-      {
+-        title: "Festive",
+-        items: [
+-          "Diwali Hamper",
+-          "Holi Set",
+-          "Christmas Box",
+-          "Eid Collection",
+-          "New Year Gift",
+-        ],
+-      },
+-      {
+-        title: "Corporate",
+-        items: [
+-          "Client Gifts",
+-          "Employee Kit",
+-          "Branded Hamper",
+-          "Welcome Kit",
+-          "Thank You Box",
+-        ],
+-      },
+-      {
+-        title: "Custom",
+-        items: [
+-          "Build Your Own",
+-          "Personal Message",
+-          "Custom Packaging",
+-          "Bulk Orders",
+-          "Same Day",
+-        ],
+-      },
+-    ],
+-  },
+-];
+-
+ const guestMenuItems = [
+   { icon: FiLogIn, label: "Login", to: "/login" },
+   { icon: FiUserPlus, label: "Register", to: "/register" },
+@@ -640,16 +45,41 @@
+   const categoryBarRef = useRef<HTMLDivElement>(null);
+   const navigate = useNavigate();
+   const isDark = false;
+   const cartCount = 0;
+-  const [city, setCity] = useState("Delhi NCR");
+   const [cityOpen, setCityOpen] = useState(false);
+-  const cities = [
+-    "Delhi NCR",
+-    "Mumbai",
+-    "Bangalore",
+-    "Jaipur",
+-    "Pune",
+-    "Hyderabad",
+-  ];
++  
++  const dispatch = useAppDispatch();
++  const apiCategories = useAppSelector((state) => state.header?.categories ?? []);
++  const locations = useAppSelector((state) => state.home?.locations ?? []);
++  const selectedLocation = useAppSelector((state) => state.home?.selectedLocation ?? "Delhi NCR");
++
++  useEffect(() => {
++    dispatch(getCategories() as any);
++    if (locations.length === 0) {
++      dispatch(getLocations() as any);
++    }
++  }, [dispatch, locations.length]);
++
++  // Convert API categories to navLinks format
++  const navLinks = apiCategories.filter(cat => cat.isActive).sort((a, b) => a.displayOrder - b.displayOrder).map(cat => {
++    const subCategories = cat.subCategories?.filter(sub => sub.isActive).sort((a, b) => a.displayOrder - b.displayOrder) || [];
++    
++    // Chunk subcategories into columns of max 5 items for the MegaMenu
++    const chunkSize = 5;
++    const chunks = [];
++    for (let i = 0; i < subCategories.length; i += chunkSize) {
++        chunks.push(subCategories.slice(i, i + chunkSize));
++    }
++    
++    return {
++      label: cat.name,
++      emoji: "✨", // Default emoji
++      to: `/category/${cat.slug}`,
++      categories: chunks.map((chunk, idx) => ({
++        title: `Category ${idx + 1}`,
++        items: chunk.map(sub => sub.name)
++      }))
++    };
++  });
+ 
+   useEffect(() => {
+     const handleClick = (e: MouseEvent) => {
+@@ -698,24 +428,24 @@
+               className="flex flex-col leading-tight shrink-0"
+               onClick={() => setActiveMenu(null)}
+             >
+-              <span
+-                style={{
+-                  fontFamily: "'Cormorant Garamond', serif",
+-                  fontSize: "1.3rem",
+-                  color: "#C9A84C",
+-                  fontWeight: 700,
+-                  letterSpacing: "0.2em",
+-                }}
+-              >
+-                TOGETHER
+-              </span>
+-              <span
+-                style={{
+-                  fontFamily: "'Jost', sans-serif",
+-                  fontSize: "0.55rem",
+-                  color: "#1A1208",
+-                  letterSpacing: "0.4em",
+-                }}
+-              >
+-                MOMENTS
+-              </span>
++              <div className="flex items-center gap-2 shrink-0">
++                <img
++                  src={CUSTOMER_CONFIG.logo}
++                  alt={CUSTOMER_CONFIG.name}
++                  className="w-9 h-9 sm:w-10 sm:h-10 object-contain"
++                />
++                <div className="hidden sm:flex flex-col">
++                  <span
++                    className="text-lg font-semibold tracking-wide"
++                    style={{ color: 'var(--burgundy)', fontFamily: "'Cormorant Garamond', serif" }}
++                  >
++                    {CUSTOMER_CONFIG.name}
++                  </span>
++                  <span
++                    className="text-xs tracking-widest uppercase"
++                    style={{ color: 'var(--mid)', fontSize: '0.65rem', letterSpacing: '0.18em' }}
++                  >
++                    Celebrate Every Moment
++                  </span>
++                </div>
++              </div>
+             </Link>
+ 
+             {/* LOCATION — desktop */}
+@@ -733,7 +463,7 @@
+                   }}
+                 >
+-                  {city}
++                  {selectedLocation}
+                 </span>
+                 <FiChevronDown size={11} color="#9E8A6A" />
+               </button>
+               {cityOpen && (
+                 <div className="absolute top-[calc(100%+8px)] left-0 bg-white rounded-xl shadow-[0_12px_40px_rgba(26,18,8,0.15)] border border-[#EDE0C4] z-20 overflow-hidden w-[160px]">
+-                  {cities.map((c) => (
++                  {locations.filter((loc: any) => loc.isActive).map((c) => (
+                     <button
+-                      key={c}
++                      key={c.name}
+                       onClick={() => {
+-                        setCity(c);
++                        dispatch(setSelectedLocation(c.name));
+                         setCityOpen(false);
+                       }}
+                       style={{ fontFamily: "'Jost', sans-serif" }}
+-                      className={`w-full text-left px-4 py-2.5 text-[0.78rem] hover:bg-[#FDFAF4] transition-colors ${c === city ? "text-[#C9A84C] font-semibold" : "text-[#5C4A1E]"}`}
++                      className={`w-full text-left px-4 py-2.5 text-[0.78rem] hover:bg-[#FDFAF4] transition-colors ${c.name === selectedLocation ? "text-[#C9A84C] font-semibold" : "text-[#5C4A1E]"}`}
+                     >
+-                      {c}
++                      {c.name}
+                     </button>
+                   ))}
+                 </div>

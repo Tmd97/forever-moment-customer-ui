@@ -1,90 +1,72 @@
 import { ShieldCheck, Clock, Star, HeartHandshake } from "lucide-react";
+import FadeIn from "@/components/animations/FadeIn";
+import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 
 const features = [
   {
     icon: ShieldCheck,
-    title: "Trusted Professionals",
-    desc: "Verified decorators with quality service guarantee",
+    title: "Verified Vendors",
+    desc: "Every vendor is background-checked and rated by real clients before joining our network.",
   },
   {
     icon: Clock,
-    title: "On Time Setup",
-    desc: "Always punctual and ready before your event starts",
+    title: "On-Time Delivery",
+    desc: "Setup completed well before your event with buffer time for any last-minute changes.",
   },
   {
     icon: Star,
-    title: "Top Rated Services",
-    desc: "Highly rated by thousands of happy customers",
+    title: "Transparent Pricing",
+    desc: "No hidden charges. What you see in the quote is exactly what you pay.",
   },
   {
     icon: HeartHandshake,
-    title: "Affordable Pricing",
-    desc: "Best decoration services at reasonable prices",
+    title: "24/7 Support",
+    desc: "Our dedicated event managers are available round the clock for any assistance.",
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-16" style={{ background: "var(--cream)" }}>
-      <div className="max-w-[var(--container-width)] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="section-padding bg-[#FDFAF4]">
+      <div className="max-w-[1380px] mx-auto px-6">
 
-        {/* Heading */}
-        <div className="text-center mb-14">
-          <div className="section-eyebrow" style={{ display: "inline-block" }}>
-            Why Us
+        <FadeIn>
+          <div className="text-center mb-12">
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif" }} className="text-[2rem] md:text-[2.6rem] text-[#1A1208] font-semibold mb-2">
+              Why Choose Us
+            </h2>
+            <p style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.7rem] text-[#9E8A6A] tracking-[0.25em] uppercase">
+              The Forever Moment Promise
+            </p>
+            <div className="w-10 h-[1px] bg-[#C9A84C] mx-auto mt-4" />
           </div>
-          <h2 className="section-title">
-            Why Choose <em>Forever Moment</em>
-          </h2>
-          <p className="mt-3" style={{ color: "var(--mid)", fontSize: "0.88rem" }}>
-            We make your special moments unforgettable
-          </p>
-        </div>
+        </FadeIn>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
-          {features.map((feature, index) => {
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feature, i) => {
+            const colors = ['#C9A84C', '#D9776B', '#C9A84C', '#D9776B']
+            const color = colors[i % colors.length]
             const Icon = feature.icon;
-
             return (
-              <div
-                key={index}
-                className="card group p-8 flex flex-col items-center text-center"
-              >
-                {/* Icon */}
-                <div
-                  className="w-14 h-14 flex items-center justify-center rounded-xl mb-5 transition-transform duration-300 group-hover:scale-110"
-                  style={{
-                    background: "var(--rose-light)",
-                    color: "var(--burgundy)",
-                  }}
-                >
-                  <Icon size={26} />
+              <StaggerItem key={feature.title}>
+                <div className="group text-center p-8 bg-white rounded-2xl shadow-[0_4px_16px_rgba(26,18,8,0.06)] hover:shadow-[0_16px_40px_rgba(201,168,76,0.2)] hover:-translate-y-2 transition-all duration-300 h-full">
+                  <div
+                    className="w-16 h-16 rounded-full bg-[#FDFAF4] flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300"
+                    style={{ border: `1.5px solid ${color}40` }}
+                  >
+                    <Icon size={24} style={{ color }} />
+                  </div>
+                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif" }} className="text-[1.2rem] text-[#1A1208] font-semibold mb-3">
+                    {feature.title}
+                  </h3>
+                  <p style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.82rem] text-[#9E8A6A] leading-relaxed">
+                    {feature.desc}
+                  </p>
                 </div>
-
-                {/* Title */}
-                <h3
-                  className="font-semibold mb-3"
-                  style={{
-                    color: "var(--charcoal)",
-                    fontSize: "1rem",
-                    fontFamily: "'Jost', sans-serif",
-                  }}
-                >
-                  {feature.title}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: "var(--mid)" }}
-                >
-                  {feature.desc}
-                </p>
-              </div>
-            );
+              </StaggerItem>
+            )
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

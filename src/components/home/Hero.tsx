@@ -1,0 +1,204 @@
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FiSearch, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+
+// ============================================
+// CAROUSEL SLIDES — har slide ka apna theme
+// ============================================
+const slides = [
+  {
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1600',
+    label: 'Forever Begins Here',
+    heading: 'Plan The',
+    accent: 'Perfect Wedding',
+    description: 'From intimate ceremonies to grand celebrations — premium decor curated for your big day.',
+    cta: { label: 'Explore Wedding Packages', to: '/services?category=Wedding' },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1600',
+    label: 'Pure Celebration',
+    heading: 'Birthdays',
+    accent: 'Made Magical',
+    description: 'Colorful, fun, and personalized birthday setups for every age, every theme.',
+    cta: { label: 'Browse Birthday Themes', to: '/services?category=Birthday' },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600',
+    label: 'No Planning Needed',
+    heading: 'Experiences',
+    accent: 'Worth Remembering',
+    description: 'Romantic dinners, surprise setups, and curated date nights — just book and relax.',
+    cta: { label: 'Discover Experiences', to: '/experiences' },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=1600',
+    label: 'Delivered With Love',
+    heading: 'Thoughtful Gifts,',
+    accent: 'Delivered Fresh',
+    description: 'Flowers, cakes, hampers and personalized gifts — same-day delivery available.',
+    cta: { label: 'Shop Gifts & Cakes', to: '/shop' },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1600',
+    label: 'Professional Excellence',
+    heading: 'Corporate Events,',
+    accent: 'Elevated',
+    description: 'Conferences, product launches, and team celebrations — executed flawlessly.',
+    cta: { label: 'Corporate Solutions', to: '/services?category=Corporate' },
+  },
+]
+
+const Hero = () => {
+  const navigate = useNavigate()
+  const [current, setCurrent] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+
+  // ============================================
+  // AUTO-PLAY — har 5 second mein next slide
+  // hover karne par pause
+  // ============================================
+  useEffect(() => {
+    if (paused) return
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [paused])
+
+  const next = () => setCurrent((prev) => (prev + 1) % slides.length)
+  const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
+
+ const handleSearch = () => {
+  if (searchQuery.trim()) navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
+}
+
+  const slide = slides[current]
+
+  return (
+    <section
+      className="relative h-[560px] md:h-[640px] overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* ============================================
+          BACKGROUND — crossfade between slides
+      ============================================ */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.9, ease: 'easeInOut' }}
+          className="absolute inset-0"
+        >
+          <img src={slide.image} alt={slide.heading} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(26,18,8,0.75) 0%, transparent 50%)' }} />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* ============================================
+          CONTENT — text changes per slide
+      ============================================ */}
+      <div className="absolute inset-0 flex items-center z-10 pb-24 md:pb-28">
+        <div className="container mx-auto px-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="max-w-[620px]"
+            >
+              <div className="inline-flex items-center gap-2 border border-[#C9A84C]/50 rounded-full px-4 py-1.5 mb-5">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]" />
+                <span style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.65rem] text-[#F5E6B8] tracking-[0.25em]">
+                  {slide.label.toUpperCase()}
+                </span>
+              </div>
+
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif" }} className="text-[2.4rem] md:text-[3.6rem] text-white font-semibold leading-[1.15] mb-4">
+                {slide.heading}{' '}
+                <span className="italic text-[#F5E6B8]">{slide.accent}</span>
+              </h1>
+
+              <p style={{ fontFamily: "'Jost', sans-serif" }} className="text-[0.9rem] text-white/80 leading-relaxed mb-7 max-w-[460px]">
+                {slide.description}
+              </p>
+
+              <Link
+                to={slide.cta.to}
+                style={{ fontFamily: "'Jost', sans-serif" }}
+                className="inline-block bg-[#C9A84C] text-white px-8 py-4 text-[0.78rem] tracking-[0.2em] uppercase font-semibold hover:bg-[#E8C97A] hover:text-[#1A1208] transition-all rounded-full"
+              >
+                {slide.cta.label}
+              </Link>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* ============================================
+          ARROWS — left/right
+      ============================================ */}
+      <button
+        onClick={prev}
+        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 items-center justify-center text-white hover:bg-white/25 transition-colors"
+      >
+        <FiChevronLeft size={20} />
+      </button>
+      <button
+        onClick={next}
+        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 items-center justify-center text-white hover:bg-white/25 transition-colors"
+      >
+        <FiChevronRight size={20} />
+      </button>
+
+      {/* ============================================
+          BOTTOM BAR — Search + Dot indicators
+      ============================================ */}
+      <div className="absolute bottom-6 left-0 right-0 z-20">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-4 md:justify-between">
+
+          {/* Compact Search Bar */}
+          <div className="w-full md:max-w-[420px] bg-white rounded-full p-1.5 flex items-center gap-2 shadow-2xl">
+            <FiSearch size={15} color="#C9A84C" className="ml-3" />
+            <input
+              type="text"
+              placeholder="Search experiences, decor, gifts..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              style={{ fontFamily: "'Jost', sans-serif" }}
+              className="flex-1 bg-transparent outline-none text-[0.82rem] text-[#1A1208] placeholder-[#9E8A6A]"
+            />
+            <button
+              onClick={handleSearch}
+              style={{ fontFamily: "'Jost', sans-serif" }}
+              className="bg-[#C9A84C] text-white rounded-full px-5 py-2.5 text-[0.7rem] tracking-[0.15em] uppercase font-semibold hover:bg-[#1A1208] transition-colors shrink-0"
+            >
+              Search
+            </button>
+          </div>
+
+          {/* Dot Indicators */}
+          <div className="flex gap-2">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`h-[6px] rounded-full transition-all ${i === current ? 'w-8 bg-[#C9A84C]' : 'w-[6px] bg-white/40 hover:bg-white/60'}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default Hero
